@@ -1,0 +1,198 @@
+
+.hall-config-panel {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.hall-config-panel__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.hall-config-panel__controls h6{
+  align-self: start;
+}
+
+.hall-config-panel__select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.hall-config-panel__dimensions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.hall-config-panel__dimensions input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #000;
+}
+.hall-config-panel__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.hall-config-panel__field label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.hall-config-panel__field input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.hall-config-panel__field input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.hall-config-panel__apply-btn {
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.hall-config-panel__apply-btn:hover {
+  background-color: #2980b9;
+}
+.hall-config-panel__legend{
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+}
+.hall-config-panel__grid {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.hall-config-panel__row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.hall-config-panel__seat {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.hall-config-panel__seat--standart {
+  background-color: #C4C4C4;
+  border: #000 1px solid;
+}
+
+.hall-config-panel__seat--vip {
+  background-color: #0A828A;
+}
+
+.hall-config-panel__seat--disabled {
+  background-color: #C4C4C4;
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.hall-config-panel__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.hall-config-panel__btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.hall-config-panel__btn--cancel {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.hall-config-panel__btn--cancel:hover {
+  background-color: #7f8c8d;
+}
+
+.hall-config-panel__btn--save {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.hall-config-panel__btn--save:hover {
+  background-color: #27ae60;
+}
+
+.hall-config-panel__btn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.hall-config-panel__legend {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.hall-config-panel__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hall-config-panel__legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.hall-config-panel__legend-color--standart {
+  background-color: #C4C4C4;
+  border: #000 1px solid;
+}
+
+.hall-config-panel__legend-color--vip {
+  background-color: #0A828A;
+  
+}
+
+.hall-config-panel__legend-color--disabled {
+  background-color: #C4C4C4;
+  opacity: 0.3;
+}

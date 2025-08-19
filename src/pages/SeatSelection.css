@@ -1,0 +1,20 @@
+.seat-selection {
+  max-width: 1280px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.seat-selection__confirm {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.seat-selection__confirm:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
