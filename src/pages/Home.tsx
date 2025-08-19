@@ -12,7 +12,7 @@ import MovieCard from '../components/ui/MovieCard';
 const Home: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split('T')[0]);
-
+  console.log("selectedDate", selectedDate);
   useEffect(() => {
     const fetchSchedule = async () => {
       try {
