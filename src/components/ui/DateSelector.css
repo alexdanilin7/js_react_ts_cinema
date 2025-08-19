@@ -1,0 +1,50 @@
+.date-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+
+.date-selector__header {
+  display: flex;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.date-selector__button {
+  padding: 10px 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  flex: 1;
+  color: #000;
+  text-align: left;
+}
+
+.date-selector__button:hover {
+  background-color: #eaeaea;
+}
+
+.date-selector__button--active {
+  background-color: #ff7f00;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  transform: scale(1.07) scaleX(1.1);
+}
+
+.date-selector__next-week {
+  padding: 10px 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 25px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  flex: 1;
+  color: #000;
+  text-align: center; /* Оранжевый цвет стрелки */
+}
