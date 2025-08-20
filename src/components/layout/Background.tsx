@@ -11,8 +11,8 @@ const Background: React.FC<BackgroundProps> = ({ isAdmin = false }) => {
       className="background"
       style={{
         backgroundImage: isAdmin
-          ? 'url("/assets/img/login_desktop.png")'
-          : 'url("/assets/img/bg_desktop.png")',
+          ? 'url("./assets/img/login_desktop.png")'
+          : 'url("./assets/img/bg_desktop.png")',
       }}
     ></div>
   );

@@ -1,7 +1,8 @@
 # Дипломная работа по профессии «Frontend-разработчик»
 
 ## Ссылки на сайт
--  — главная страница (пользовательская)
+- https://alexdanilin7.github.io/js_react_ts_cinema/ — главная страница (пользовательская)
+- https://alexdanilin7.github.io/js_react_ts_cinema/#/admin/login - админка
 
 ***
 

@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Header from './components/layout/Header';
 import SeatSelection from './pages/SeatSelection';
@@ -16,9 +16,10 @@ const AppContent: React.FC = () => {
 
   return (
     <>
-      <main className="main-content">
+    <main className="main-content">
       <Background isAdmin={isAdminPage} />
       <Header />
+        
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/session/:seanceId" element={<SeatSelection />} />
@@ -33,6 +34,7 @@ const AppContent: React.FC = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="/admin" element={<AdminLogin />} />
         </Routes>
       </main>
     </>
@@ -41,9 +43,7 @@ const AppContent: React.FC = () => {
 
 function App() {
   return (
-   <Router>
-      <AppContent />
-    </Router>
+      <AppContent />    
   )
 }
 

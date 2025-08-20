@@ -11,13 +11,9 @@ interface MovieCardProps {
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie, keyIndex }) => {
    const navigate = useNavigate();
-   
    const handleSessionClick = (seanceId: number, selectedDate:string) => {
-    console.log('safhaksjdfkajdsgfakdghjs', seanceId, selectedDate);
     navigate(`/session/${seanceId}?date=${selectedDate}`);
   };
-
-  console.log("movie", movie);
   return (
     <div className="movie-card" key={keyIndex}>
       <div className="movie-content">

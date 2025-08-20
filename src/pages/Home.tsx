@@ -22,17 +22,11 @@ const Home: React.FC = () => {
           console.error('Ошибка API:', response.error);
           return;
         }
-
         const { halls, films, seances } = response.result;
-        console.log("seances", seances);
-        console.log("films", films);
-        console.log("halls", halls);
         //todo определить дату и вывести сеансы по дате
         const seancesWithHalls = (filmId:number) => {
           const seancesList = seances.filter(seance => seance.seance_filmid===filmId);
-          console.log("secances", seancesList);
           const listSeances = seancesList.map(seance => {return {timeSeance:seance.seance_time, seanceId:seance.id}});
-          console.log("list",listSeances)
           if (seancesList.length === 0) {
             return {
               time: [],
@@ -70,7 +64,7 @@ const Home: React.FC = () => {
     <div className="home-page">
       <DateSelector onChange={setSelectedDate} />
       <div className="movie-list">
-        {movies.map(film => <MovieCard movie={film} keyIndex={film.id}/>)}
+        {movies.map(film => <div key={film.id}><MovieCard movie={film} keyIndex={film.id}/></div>)}
       </div>
     </div>
   );
