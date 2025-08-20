@@ -23,22 +23,37 @@ const Home: React.FC = () => {
           return;
         }
         const { halls, films, seances } = response.result;
+       
         //todo определить дату и вывести сеансы по дате
-        const seancesWithHalls = (filmId:number) => {
-          const seancesList = seances.filter(seance => seance.seance_filmid===filmId);
-          const listSeances = seancesList.map(seance => {return {timeSeance:seance.seance_time, seanceId:seance.id}});
-          if (seancesList.length === 0) {
-            return {
-              time: [],
-              hallName: '',
+        const seancesWithHalls = (filmId: number) => {
+              const seancesList = seances
+                .filter(seance => seance.seance_filmid === filmId)
+                .filter(seance => {
+                  const hall = halls.find(h => h.id === seance.seance_hallid);
+                  return hall?.hall_open === 1;
+                });
+
+              const map = new Map<number, { hallName: string; seanceTimes: { seanceId: number; seance_time: string }[] }>();
+
+              seancesList.forEach(seance => {
+                const hall = halls.find(h => h.id === seance.seance_hallid);
+                if (!hall) return;
+
+                const key = hall.id;
+                const timeObj = { seanceId: seance.id, seance_time: seance.seance_time };
+
+                if (map.has(key)) {
+                  map.get(key)!.seanceTimes.push(timeObj);
+                } else {
+                  map.set(key, {
+                    hallName: hall.hall_name,
+                    seanceTimes: [timeObj],
+                  });
+                }
+              });
+
+              return Array.from(map.values());
             };
-          }
-          const hallName = halls.find(h => h.id === seancesList[0].seance_hallid)?.hall_name;
-          return {
-            time: listSeances,
-            hallName,
-                   }
-        }
         // Преобразуем данные
         const filmWithSessions: Movie[] = films.map(film => ({
             id: film.id,

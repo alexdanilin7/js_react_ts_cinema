@@ -27,7 +27,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, keyIndex }) => {
       </div>
    
       <div className="hall-sessions">
-          {movie.sessions.time.length > 0 ? (
+          {movie.sessions.length > 0 ? (
             <HallSessionList sessionsByHall={movie.sessions} onSelectSession={handleSessionClick}/>
           ) : (
             <p>Нет сеансов</p>

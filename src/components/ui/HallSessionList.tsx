@@ -3,27 +3,33 @@ import './HallSessionList.css';
 import capitalizeFirstLetter from '../../services/utils';
 
 interface HallSessionListProps {
-  sessionsByHall: {time: {
-                          timeSeance: string,
-                          seanceId: number
-                        }[], 
-                  hallName: string | undefined};
+  sessionsByHall: {
+    hallName: string;
+    seanceTimes: {
+        seanceId: number;
+        seance_time: string;
+    }[];
+  }[];
   onSelectSession: (sessionId: number, date:string) => void;
 }
 
 const HallSessionList: React.FC<HallSessionListProps> = ({ sessionsByHall, onSelectSession }) => {
-  return (
+  return (  
     <div className='hall-session'>
-      <div className='hall-session__title'>
-        <b>{capitalizeFirstLetter(sessionsByHall.hallName)}</b>
-      </div>
-      <ul className='session-time'>
-        {sessionsByHall.time.map((time: {
-                          timeSeance: string,
-                          seanceId: number
-                        }) => (<li key={time.seanceId} onClick={()=>onSelectSession(time.seanceId, "2023-12-01")}>{time.timeSeance}</li>))}
-      </ul>
+      {sessionsByHall.map((session)=>(
+                            <>
+                              <div className='hall-session__title'>{capitalizeFirstLetter(session.hallName)}</div>
+                              <ul className='session-time'>
+                                {session.seanceTimes.map((time)=>(
+                                  <li key={time.seanceId} onClick={()=>onSelectSession(time.seanceId, "2023-12-01")}>{time.seance_time}</li>
+                                  ))}
+                              </ul>
+                            </>
+                          ))}
+                                                       
     </div>
+
+
   );
 };
 

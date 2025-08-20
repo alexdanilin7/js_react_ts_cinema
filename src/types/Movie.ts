@@ -7,10 +7,10 @@ export interface Movie {
   releaseYear: number;
   posterUrl?: string | undefined;
   sessions: {
-    time:  {
-            timeSeance: string,
-            seanceId: number
-          }[];
-    hallName: string | undefined;
-  };
+    hallName: string;
+    seanceTimes: {
+        seanceId: number;
+        seance_time: string;
+    }[];
+  }[];
 }
