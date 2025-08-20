@@ -120,8 +120,8 @@ const SeatSelection: React.FC = () => {
     try {
       const response = await apiClient.post<{ tickets: any[] }>('/ticket', formData);
 
-      if (response.success && response.result.length > 0) {
-        const firstTicket = response.result[0];
+      if (response.success && response.result.tickets.length > 0) {
+        const firstTicket = response.result.tickets[0];
         setBookingCode(firstTicket.id.toString());
         setIsBookingConfirmed(true);
         setBookingError(null);
