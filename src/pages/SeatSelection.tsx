@@ -28,7 +28,7 @@ const SeatSelection: React.FC = () => {
 
   // Состояние для подтверждения
   const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
-  const [bookingCode, setBookingCode] = useState<string | null>(null);
+  //const [bookingCode, setBookingCode] = useState<string | null>(null);
   const [bookingError, setBookingError] = useState<string | null>(null);
   const [qrCodeData, setQrCodeData] = useState<string | null>(null);
   const [showQrCode, setShowQrCode] = useState(false);
@@ -42,7 +42,6 @@ const SeatSelection: React.FC = () => {
           halls: any[];
           seances: any[];
         }>('/alldata');
-
         if (response.success) {
           const { films, halls, seances } = response.result;
           const seance = seances.find((s: any) => s.id === Number(seanceId));
@@ -72,7 +71,6 @@ const SeatSelection: React.FC = () => {
         const response = await apiClient.get<string[][]>(
           `/hallconfig?seanceId=${seanceId}&date=${date}`
         );
-
         if (response.success) {
           setHallConfig(response.result);
         } else {
@@ -118,11 +116,11 @@ const SeatSelection: React.FC = () => {
     ));
 
     try {
-      const response = await apiClient.post<{ tickets: any[] }>('/ticket', formData);
-
-      if (response.success && response.result.tickets.length > 0) {
-        const firstTicket = response.result.tickets[0];
-        setBookingCode(firstTicket.id.toString());
+      const response = await apiClient.post<any[]>('/ticket', formData);
+      console.log(response);
+      if (response.success && response.result.length > 0) {
+        const firstTicket = response.result[0];
+        //setBookingCode(firstTicket.id.toString());
         setIsBookingConfirmed(true);
         setBookingError(null);
 
@@ -166,17 +164,13 @@ const SeatSelection: React.FC = () => {
           <div className="seat-selection__header">
             <h2>{movieTitle}</h2>
             <div className="seat-selection__info">
-              <p><strong>Время:</strong> {seanceTime}</p>
+              <p><strong>Начало сеанса:</strong> {seanceTime}</p>
               <p><strong>Зал:</strong> {hallName}</p>
             </div>
-            <div className="seat-selection__prices">
-              <span>Обычное: {priceStandart} ₽</span>
-              <span>VIP: {priceVip} ₽</span>
-            </div>
           </div>
-
-          <HallMap hallConfig={hallConfig} onSeatSelect={handleSeatSelect} />
-
+          <div className="seat-selection__hall-map">
+               <HallMap price={{"vip": priceVip, "standart":priceStandart}} hallConfig={hallConfig} onSeatSelect={handleSeatSelect} />
+          </div>
           <div className="seat-selection__summary">
             <p><strong>Выбрано мест:</strong> {selectedSeats.length}</p>
             <p><strong>Стоимость:</strong> {totalCost} ₽</p>
@@ -199,19 +193,16 @@ const SeatSelection: React.FC = () => {
           <p><strong>В зале:</strong> {hallName}</p>
           <p><strong>Начало сеанса:</strong> {seanceTime}</p>
           <p><strong>Стоимость:</strong> {totalCost} ₽</p>
-
-          <p><strong>Код бронирования:</strong> <code>{bookingCode}</code></p>
-
           {showQrCode ? (
             <div className="seat-selection__qr-code">
-              <QRCodeSVG value={qrCodeData || ''} size={200} level="H" />
+              <QRCodeSVG value={qrCodeData || ''} size={150} level="H" />
             </div>
           ) : (
             <button
               className="seat-selection__confirm"
               onClick={() => setShowQrCode(true)}
             >
-              Показать QR-код
+              Получить код бронирования
             </button>
           )}
           <p>

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import './HallMap.css';
 
 interface HallMapProps {
+  price:{vip: number; standart: number};
   hallConfig: string[][]; // Конфигурация зала
   onSeatSelect: (row: number, seat: number) => void;
 }
 
-const HallMap: React.FC<HallMapProps> = ({ hallConfig, onSeatSelect }) => {
+const HallMap: React.FC<HallMapProps> = ({ price, hallConfig, onSeatSelect }) => {
   const [selectedSeats, setSelectedSeats] = useState<{ row: number; seat: number }[]>([]);
 
   const handleSeatClick = (row: number, seat: number) => {
@@ -53,11 +54,11 @@ const HallMap: React.FC<HallMapProps> = ({ hallConfig, onSeatSelect }) => {
       <div className="hall-map__legend">
         <div className="hall-map__legend-item">
           <span className="hall-map__legend-seat hall-map__legend-seat--standart"></span>
-          <span>Свободно (250 руб)</span>
+          <span>Свободно ({price.standart} руб)</span>
         </div>
         <div className="hall-map__legend-item">
           <span className="hall-map__legend-seat hall-map__legend-seat--vip"></span>
-          <span>Свободно VIP (350 руб)</span>
+          <span>Свободно VIP ({price.vip} руб)</span>
         </div>
         <div className="hall-map__legend-item">
           <span className="hall-map__legend-seat hall-map__legend-seat--taken"></span>
