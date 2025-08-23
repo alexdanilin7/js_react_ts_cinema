@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { apiClient } from '../../services/apiClient';
 import './HallConfigPanel.css';
@@ -16,7 +15,7 @@ type SeatType = 'standart' | 'vip' | 'disabled';
 
 const HallConfigPanel: React.FC = () => {
   const [halls, setHalls] = useState<Hall[]>([]);
-  const [selectedHallId, setSelectedHallId] = useState<number | ''>('');
+  const [selectedHallId, setSelectedHallId] = useState<number | null>(null);
   const [rows, setRows] = useState<number>(0);
   const [places, setPlaces] = useState<number>(0);
   const [config, setConfig] = useState<SeatType[][]>([]);
@@ -86,7 +85,6 @@ const HallConfigPanel: React.FC = () => {
           Array(places)
             .fill(null)
             .map((_, seatIndex) => {
-              // Сохраняем старые значения, если они есть
               return prev[rowIndex] && prev[rowIndex][seatIndex]
                 ? prev[rowIndex][seatIndex]
                 : 'standart';
@@ -123,12 +121,11 @@ const HallConfigPanel: React.FC = () => {
       );
 
       if (response.success) {
-        // Обновляем список залов (включая новые размеры)
         const alldata = await apiClient.get<{ halls: Hall[] }>('/alldata');
-      if (alldata.success) {
-        setHalls(alldata.result.halls);
-        alert('Конфигурация зала сохранена!');
-      }
+        if (alldata.success) {
+          setHalls(alldata.result.halls);
+          alert('Конфигурация зала сохранена!');
+        }
       } else {
         alert('Ошибка: ' + (response.error || 'Неизвестная ошибка'));
       }
@@ -141,18 +138,26 @@ const HallConfigPanel: React.FC = () => {
     <div className="hall-config-panel panel">
       <div className="hall-config-panel__controls">
         <h6>Выберите зал для конфигурации:</h6>
-        <select
-          value={selectedHallId}
-          onChange={e => setSelectedHallId(Number(e.target.value) || '')}
-          className="hall-config-panel__select"
-        >
-          <option value="">Выберите зал</option>
-          {halls.map(hall => (
-            <option key={hall.id} value={hall.id}>
-              {hall.hall_name}
-            </option>
-          ))}
-        </select>
+
+        {/* Список кнопок-залов */}
+        <div className="hall-config-panel__hall-buttons">
+          {halls.length === 0 ? (
+            <span>Нет доступных залов</span>
+          ) : (
+            halls.map(hall => (
+              <button
+                key={hall.id}
+                className={`hall-config-panel__hall-btn ${
+                  selectedHallId === hall.id ? 'hall-config-panel__hall-btn--active' : ''
+                }`}
+                onClick={() => setSelectedHallId(hall.id)}
+              >
+                {hall.hall_name}
+              </button>
+            ))
+          )}
+        </div>
+
         <h6>Укажите количество рядов и максимальное количество кресел в ряду:</h6>
         <div className="hall-config-panel__dimensions">
           <div className="hall-config-panel__field">
@@ -183,9 +188,29 @@ const HallConfigPanel: React.FC = () => {
           </button>
         </div>
       </div>
+      {/* Легенда */}
+      <div className='hall-config-panel__legend__title'>
+        <h6>Теперь вы можете указать типы кресел на схеме зала:</h6>
+      </div>
+      <div className="hall-config-panel__legend">
+        
+        <div className="hall-config-panel__legend-item">
+          <span className="hall-config-panel__legend-color hall-config-panel__legend-color--standart"></span>
+          <span> - Обычные кресла</span>
+        </div>
+        <div className="hall-config-panel__legend-item">
+          <span className="hall-config-panel__legend-color hall-config-panel__legend-color--vip"></span>
+          <span> - VIP кресла</span>
+        </div>
+        <div className="hall-config-panel__legend-item">
+          <span className="hall-config-panel__legend-color hall-config-panel__legend-color--disabled"></span>
+          <span> - заблокированные (Нет кресла)</span>
+        </div>
+      </div>
 
-      {config.length > 0 && (
-        <div className="hall-config-panel__legend">
+      {/* Схема зала */}
+      {selectedHallId && config.length > 0 && (
+        <div className="hall-config-panel__legend__hall">
           <h6>ЭКРАН</h6>
           <div className="hall-config-panel__grid">
             {config.map((row, rowIndex) => (
@@ -205,6 +230,7 @@ const HallConfigPanel: React.FC = () => {
         </div>
       )}
 
+      {/* Кнопки Отмена / Сохранить */}
       <div className="hall-config-panel__actions">
         <button
           className="hall-config-panel__btn hall-config-panel__btn--cancel"
@@ -221,20 +247,7 @@ const HallConfigPanel: React.FC = () => {
         </button>
       </div>
 
-      <div className="hall-config-panel__legend">
-        <div className="hall-config-panel__legend-item">
-          <span className="hall-config-panel__legend-color hall-config-panel__legend-color--standart"></span>
-          <span>Обычное</span>
-        </div>
-        <div className="hall-config-panel__legend-item">
-          <span className="hall-config-panel__legend-color hall-config-panel__legend-color--vip"></span>
-          <span>VIP</span>
-        </div>
-        <div className="hall-config-panel__legend-item">
-          <span className="hall-config-panel__legend-color hall-config-panel__legend-color--disabled"></span>
-          <span>Нет кресла</span>
-        </div>
-      </div>
+      
     </div>
   );
 };

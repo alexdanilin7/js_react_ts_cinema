@@ -1,133 +1,607 @@
+/* src/components/admin/SeanceGridPanel/SeanceGridPanel.css */
+
 .seance-grid-panel {
-  background-color: #fff;
+  background-color: #f0f0f0;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.seance-grid-panel h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
 }
 
 .seance-grid-panel__controls {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.seance-grid-panel__controls button {
+.seance-grid-panel__add-film-btn {
   padding: 10px 20px;
-  background-color: #3498db;
+  background-color: #2ecc71;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
 }
 
-.seance-grid-panel__drag-list {
-  margin-bottom: 20px;
-}
-
-.seance-grid-panel__drag-list h3 {
-  margin: 0 0 10px;
-}
-
-.seance-grid-panel__films {
+.seance-grid-panel__films-list {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+  justify-content: center;
 }
 
-.seance-grid-panel__film {
-  padding: 10px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+.seance-grid-panel__film-card {
+  display: flex;
+  align-items: center;
+  background-color: #e0f7c7;
+  border: 1px solid #a5d6a7;
   border-radius: 4px;
+  padding: 8px;
+  font-size: 14px;
   cursor: move;
-  user-select: none;
+  position: relative;
+  min-width: 200px;
+}
+
+.seance-grid-panel__film-poster {
+  width: 40px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.seance-grid-panel__film-info {
+  margin-left: 8px;
+  flex: 1;
+}
+
+.seance-grid-panel__film-title {
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.seance-grid-panel__film-duration {
+  color: #555;
+  font-size: 12px;
+}
+
+.seance-grid-panel__film-delete-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #999;
+}
+
+/* Контейнер сетки */
+.seance-grid-panel__grid-container {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 .seance-grid-panel__grid {
-  overflow-x: auto;
-  white-space: nowrap;
-  margin-bottom: 15px;
+  min-width: 480px; /* 24 часа * 20px */
 }
 
-.seance-grid-panel__time-header {
+/* Заголовок временной шкалы */
+.seance-grid-panel__timeline-header {
   display: flex;
-  min-width: max-content;
-}
-
-.seance-grid-panel__time-header-cell {
-  width: 60px;
-  text-align: center;
-  font-size: 12px;
-  padding: 5px;
-  background-color: #eee;
-}
-
-.seance-grid-panel__hall-row {
-  display: flex;
-  min-width: max-content;
-}
-
-.seance-grid-panel__hall-label {
-  width: 120px;
-  padding: 10px;
-  background-color: #eee;
-  border-right: 1px solid #ddd;
-  font-weight: 500;
-}
-
-.seance-grid-panel__cell {
-  width: 60px;
   height: 40px;
-  border: 1px solid #ddd;
+  background: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+  min-width: 480px;
+}
+
+.seance-grid-panel__hall-label-spacer {
+  width: 120px;
+  flex-shrink: 0;
+  border-right: 1px solid #dee2e6;
+}
+
+.seance-grid-panel__timeline-scale {
+  display: flex;
+  flex: 1;
   position: relative;
 }
 
-.seance-grid-panel__cell--occupied {
-  background-color: #f6f8ff;
+.seance-grid-panel__time-mark {
+  flex: 1;
+  position: relative;
+  text-align: center;
+  min-width: 40px; /* 2 часа * 20px */
 }
 
-.seance-grid-panel__seance {
+.seance-grid-panel__time-marker {
+  width: 1px;
+  height: 8px;
+  background-color: #666;
+  margin: 0 auto;
+}
+
+.seance-grid-panel__time-label {
+  font-size: 10px;
+  color: #666;
   position: absolute;
-  inset: 2px;
-  background-color: #3498db;
-  color: white;
-  font-size: 12px;
-  padding: 2px;
-  border-radius: 2px;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+/* Секция зала */
+.seance-grid-panel__hall-section {
+  display: flex;
+  min-height: 80px;
+  border-bottom: 1px solid #eee;
+  min-width: 480px;
+}
+
+.seance-grid-panel__hall-section:last-child {
+  border-bottom: none;
+}
+
+/* Заголовок зала */
+.seance-grid-panel__hall-header {
+  width: 120px;
+  flex-shrink: 0;
+  padding: 10px;
+  background: #e9ecef;
+  border-right: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seance-grid-panel__hall-title {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Таймлайн зала */
+.seance-grid-panel__hall-timeline {
+  position: relative;
+  height: 70px;
+  background: #fefeff;
+  flex: 1;
+}
+
+.seance-grid-panel__timeline-line {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ccc;
+}
+
+.seance-grid-panel__time-marks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+}
+
+.seance-grid-panel__time-indicator {
+  flex: 1;
+  position: relative;
+}
+
+.seance-grid-panel__time-dot {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background: #666;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Контейнер сеанса */
+.seance-grid-panel__seance-container {
+  position: absolute;
+  top: 10px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Блок сеанса */
+.seance-grid-panel__seance-block {
+  background: #4caf50;
+  color: white;
+  border-radius: 3px;
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin-bottom: 3px;
+  min-width: 40px;
+  height: 24px;
+}
+
+.seance-grid-panel__seance-title {
+  font-size: 10px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
 }
 
 .seance-grid-panel__remove-btn {
   background: none;
   border: none;
-  color: white;
-  font-weight: bold;
+  font-size: 12px;
   cursor: pointer;
-  font-size: 14px;
-  align-self: flex-end;
+  color: white;
+  margin-left: 3px;
+  flex-shrink: 0;
+  padding: 0;
+  width: 12px;
+  height: 12px;
 }
 
-.seance-grid-panel__legend {
+.seance-grid-panel__remove-btn:hover {
+  color: #ffeb3b;
+}
+
+/* Время сеанса */
+.seance-grid-panel__seance-time {
+  position: absolute;
+  top: 38px;
+  font-size: 10px;
+  color: #666;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+  width: 100%;
+}
+
+/* Модальное окно */
+.seance-grid-panel__modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  gap: 20px;
-  font-size: 14px;
-  color: #555;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.seance-grid-panel__legend-item {
+.seance-grid-panel__modal {
+  background-color: white;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90vw;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.seance-grid-panel__modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+  background-color: #f8f9fa;
+}
+
+.seance-grid-panel__modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.seance-grid-panel__modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
 }
 
-.seance-grid-panel__legend-color {
-  width: 16px;
-  height: 16px;
+.seance-grid-panel__modal-close:hover {
+  color: #333;
+  background-color: #e9ecef;
+  border-radius: 50%;
+}
+
+.seance-grid-panel__modal-body {
+  padding: 20px;
+}
+
+.seance-grid-panel__modal-field {
+  margin-bottom: 15px;
+}
+
+.seance-grid-panel__modal-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.seance-grid-panel__modal-field select,
+.seance-grid-panel__modal-field input[type="time"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #f0f0f0;
+  font-size: 14px;
 }
 
-.seance-grid-panel__legend-color--occupied {
+.seance-grid-panel__modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+}
+
+.seance-grid-panel__modal-btn-cancel,
+.seance-grid-panel__modal-btn-save {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.seance-grid-panel__modal-btn-cancel {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.seance-grid-panel__modal-btn-save {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.seance-grid-panel__modal-btn-save:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.panel__error {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  border: 1px solid #ef9a9a;
+  text-align: center;
+}
+
+.panel__success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  border: 1px solid #a5d6a7;
+  text-align: center;
+}
+
+/* Улучшенная кнопка удаления */
+.seance-grid-panel__remove-btn {
+  background: none;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  color: white;
+  margin-left: 3px;
+  flex-shrink: 0;
+  padding: 0;
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.seance-grid-panel__remove-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffeb3b;
+}
+
+/* Анимация при удалении */
+.seance-grid-panel__seance-container {
+  transition: opacity 0.3s ease;
+}
+
+.seance-grid-panel__seance-container.removing {
+  opacity: 0.5;
+}
+
+.seance-grid-panel__modal--film {
+  width: 500px;
+}
+
+.seance-grid-panel__modal-field textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.seance-grid-panel__file-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.seance-grid-panel__file-input {
+  display: none;
+}
+
+.seance-grid-panel__file-label {
+  padding: 10px 15px;
   background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.seance-grid-panel__file-label:hover {
+  background-color: #2980b9;
+}
+
+.seance-grid-panel__file-name {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Адаптивность для модального окна */
+@media (max-width: 768px) {
+  .seance-grid-panel__modal--film {
+    width: 90vw;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .seance-grid-panel__modal--film {
+    width: 95vw;
+    margin: 10px;
+  }
+  
+  .seance-grid-panel__file-label {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .seance-grid-panel {
+    padding: 10px;
+  }
+  
+  .seance-grid-panel__film-card {
+    min-width: 150px;
+    font-size: 12px;
+  }
+  
+  .seance-grid-panel__film-poster {
+    width: 30px;
+    height: 45px;
+  }
+  
+  .seance-grid-panel__hall-header {
+    width: 80px;
+    padding: 5px;
+  }
+  
+  .seance-grid-panel__hall-title {
+    font-size: 12px;
+  }
+  
+  .seance-grid-panel__hall-label-spacer {
+    width: 80px;
+  }
+  
+  .seance-grid-panel__time-label {
+    font-size: 8px;
+  }
+  
+  .seance-grid-panel__seance-title {
+    font-size: 8px;
+  }
+  
+  .seance-grid-panel__seance-time {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .seance-grid-panel__grid {
+    min-width: 360px; /* Уже на мобильных */
+  }
+  
+  .seance-grid-panel__time-mark {
+    min-width: 30px;
+  }
+  
+  .seance-grid-panel__time-label {
+    font-size: 7px;
+  }
+}
+
+/* Кнопка удаления фильма */
+.seance-grid-panel__film-delete-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #999;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  margin-left: 8px;
+}
+
+.seance-grid-panel__film-delete-btn:hover {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+/* Анимация при наведении на карточку фильма */
+.seance-grid-panel__film-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.seance-grid-panel__film-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

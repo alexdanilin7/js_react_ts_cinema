@@ -18,7 +18,7 @@ interface ApiAllData {
 
 const PriceConfigPanel: React.FC = () => {
   const [halls, setHalls] = useState<Hall[]>([]);
-  const [selectedHallId, setSelectedHallId] = useState<number | ''>('');
+  const [selectedHallId, setSelectedHallId] = useState<number | null>(null);
   const [priceStandard, setPriceStandard] = useState<number>(0);
   const [priceVip, setPriceVip] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
@@ -79,7 +79,7 @@ const PriceConfigPanel: React.FC = () => {
 
       if (response.success) {
         // Обновляем список залов
-        setHalls(prev => prev.map(h => h.id === selectedHallId ? response.result : h));
+        setHalls(prev => prev.map(h => (h.id === selectedHallId ? response.result : h)));
         setError(null);
         alert('Цены успешно обновлены!');
       } else {
@@ -109,18 +109,24 @@ const PriceConfigPanel: React.FC = () => {
       ) : (
         <>
           <div className="price-config-panel__controls">
-            <select
-              value={selectedHallId}
-              onChange={e => setSelectedHallId(Number(e.target.value) || '')}
-              className="price-config-panel__select"
-            >
-              <option value="">Выберите зал</option>
-              {halls.map(hall => (
-                <option key={hall.id} value={hall.id}>
-                  {hall.hall_name}
-                </option>
-              ))}
-            </select>
+            <h6>Выберите зал для настройки цен:</h6>
+            <div className="price-config-panel__hall-buttons">
+              {halls.length === 0 ? (
+                <span>Нет доступных залов</span>
+              ) : (
+                halls.map(hall => (
+                  <button
+                    key={hall.id}
+                    className={`price-config-panel__hall-btn ${
+                      selectedHallId === hall.id ? 'price-config-panel__hall-btn--active' : ''
+                    }`}
+                    onClick={() => setSelectedHallId(hall.id)}
+                  >
+                    {hall.hall_name}
+                  </button>
+                ))
+              )}
+            </div>
           </div>
 
           {selectedHallId && (
@@ -166,16 +172,14 @@ const PriceConfigPanel: React.FC = () => {
 
           <div className="price-config-panel__info">
             <p>Текущие цены:</p>
-            <ul>
-              {halls
-                .filter(h => h.id === selectedHallId)
-                .map(h => (
-                  <li key={h.id}>
-                    Обычное: <strong>{h.hall_price_standart} ₽</strong>, 
-                    VIP: <strong>{h.hall_price_vip} ₽</strong>
-                  </li>
-                ))}
-            </ul>
+            {halls
+              .filter(h => h.id === selectedHallId)
+              .map(h => (
+                <ul key={h.id}>
+                  <li>Обычное: <strong>{h.hall_price_standart} ₽</strong></li>
+                  <li>VIP: <strong>{h.hall_price_vip} ₽</strong></li>
+                </ul>
+              ))}
           </div>
         </>
       )}
