@@ -23,7 +23,6 @@ const AdminLogin: React.FC = () => {
 
       if (response.success) {
         login();
-       // window.location.href = '/admin/halls';
        navigate('/admin/halls');
       } else {
         setError(response.error || 'Неверный логин или пароль');
