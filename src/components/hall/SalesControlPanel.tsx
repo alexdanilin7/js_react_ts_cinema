@@ -1,4 +1,3 @@
-// src/components/admin/SalesControlPanel/SalesControlPanel.tsx
 import React, { useState, useEffect } from 'react';
 import { apiClient } from '../../services/apiClient';
 import './SalesControlPanel.css';

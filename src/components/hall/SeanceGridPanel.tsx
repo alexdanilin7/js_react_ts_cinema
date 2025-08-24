@@ -1,4 +1,3 @@
-// src/components/admin/SeanceGridPanel/SeanceGridPanel.tsx
 import React, { useState, useEffect } from 'react';
 import { apiClient } from '../../services/apiClient';
 import './SeanceGridPanel.css';

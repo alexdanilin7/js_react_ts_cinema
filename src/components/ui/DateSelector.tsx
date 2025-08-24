@@ -4,9 +4,7 @@ import capitalizeFirstLetter from '../../services/utils';
 interface DateSelectorProps {
   onChange: (date: string) => void;
 }
-// const capitalizeFirstLetter = (string: string): string => {
-//   return string.charAt(0).toUpperCase() + string.slice(1);
-// };
+
 
 const DateSelector: React.FC<DateSelectorProps> = ({ onChange }) => {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
