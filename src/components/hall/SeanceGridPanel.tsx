@@ -263,7 +263,7 @@ const SeanceGridPanel: React.FC = () => {
   });
 
   // Ширина одного часа в пикселях
-  const HOUR_WIDTH = 20;
+  const HOUR_WIDTH = 40;
   // Общая ширина временной шкалы (24 часа)
   const TIMELINE_WIDTH = 24 * HOUR_WIDTH;
 
@@ -310,22 +310,6 @@ const SeanceGridPanel: React.FC = () => {
       {/* Сетка сеансов */}
       <div className="seance-grid-panel__grid-container">
         <div className="seance-grid-panel__grid">
-          {/* Временная шкала */}
-          <div className="seance-grid-panel__timeline-header">
-            <div className="seance-grid-panel__hall-label-spacer"></div>
-            <div 
-              className="seance-grid-panel__timeline-scale"
-              style={{ width: `${TIMELINE_WIDTH}px` }}
-            >
-              {TIME_MARKS.map(time => (
-                <div key={time} className="seance-grid-panel__time-mark">
-                  <div className="seance-grid-panel__time-marker"></div>
-                  <span className="seance-grid-panel__time-label">{time}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {halls.map(hall => {
             const hallSeances = seances.filter(s => s.seance_hallid === hall.id);
             
@@ -341,18 +325,6 @@ const SeanceGridPanel: React.FC = () => {
                   onDrop={e => handleDrop(e, hall.id, '12:00')}
                   style={{ width: `${TIMELINE_WIDTH}px` }}
                 >
-                  {/* Линия времени */}
-                  <div className="seance-grid-panel__timeline-line"></div>
-                  
-                  {/* Временные отметки */}
-                  <div className="seance-grid-panel__time-marks">
-                    {TIME_MARKS.map(time => (
-                      <div key={time} className="seance-grid-panel__time-indicator">
-                        <div className="seance-grid-panel__time-dot"></div>
-                      </div>
-                    ))}
-                  </div>
-                  
                   {/* Сеансы */}
                   {hallSeances.map(seance => {
                     const film = films.find(f => f.id === seance.seance_filmid);
@@ -360,7 +332,7 @@ const SeanceGridPanel: React.FC = () => {
                     
                     const startMinutes = timeToMinutes(seance.seance_time);
                     const startPosition = (startMinutes / 60) * HOUR_WIDTH;
-                    const width = Math.max((film.film_duration / 60) * HOUR_WIDTH, 40);
+                    const width = Math.max((film.film_duration / 60) * HOUR_WIDTH, HOUR_WIDTH);
                     
                     return (
                       <div
@@ -385,6 +357,7 @@ const SeanceGridPanel: React.FC = () => {
                           </button>
                         </div>
                         <div className="seance-grid-panel__seance-time">
+                          <div className="seance-grid-panel__seance-time-line"></div>
                           {seance.seance_time}
                         </div>
                       </div>

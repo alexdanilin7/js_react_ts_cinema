@@ -1,6 +1,4 @@
 .seance-grid-panel {
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
@@ -16,7 +14,7 @@
 
 .seance-grid-panel__controls {
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .seance-grid-panel__add-film-btn {
@@ -32,10 +30,11 @@
 
 .seance-grid-panel__films-list {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 30px;
-  justify-content: center;
+  justify-content: left;
 }
 
 .seance-grid-panel__film-card {
@@ -84,19 +83,17 @@
 
 /* Контейнер сетки */
 .seance-grid-panel__grid-container {
-  margin-top: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  margin-top: 30px;
   background: white;
   overflow-x: auto;
   max-width: 100%;
 }
 
 .seance-grid-panel__grid {
-  min-width: 480px; /* 24 часа * 20px */
+  min-width: 480px; 
 }
 
-/* Заголовок временной шкалы */
+
 .seance-grid-panel__timeline-header {
   display: flex;
   height: 40px;
@@ -146,8 +143,9 @@
 .seance-grid-panel__hall-section {
   display: flex;
   min-height: 80px;
-  border-bottom: 1px solid #eee;
   min-width: 480px;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .seance-grid-panel__hall-section:last-child {
@@ -159,8 +157,6 @@
   width: 120px;
   flex-shrink: 0;
   padding: 10px;
-  background: #e9ecef;
-  border-right: 1px solid #dee2e6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,17 +165,18 @@
 .seance-grid-panel__hall-title {
   margin: 0;
   font-size: 14px;
-  color: #333;
   font-weight: bold;
   text-align: center;
 }
 
 /* Таймлайн зала */
 .seance-grid-panel__hall-timeline {
+  border: #0b0e0f 1px solid;
   position: relative;
   height: 70px;
   background: #fefeff;
   flex: 1;
+  right: -30px;
 }
 
 .seance-grid-panel__timeline-line {
@@ -221,6 +218,7 @@
   position: absolute;
   top: 10px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   z-index: 2;
@@ -272,13 +270,21 @@
 /* Время сеанса */
 .seance-grid-panel__seance-time {
   position: absolute;
-  top: 38px;
+  top: 30px;
+  right: 35px;
   font-size: 10px;
   color: #666;
   font-weight: 500;
   white-space: nowrap;
   text-align: center;
   width: 100%;
+}
+.seance-grid-panel__seance-time-line{
+   border-left: 1px solid #000;
+   height: 5px;
+   position: relative;
+   left: 50%;
+  
 }
 
 /* Модальное окно */
@@ -516,61 +522,7 @@
     font-size: 12px;
   }
 }
-/* Адаптивность для мобильных устройств */
-@media (max-width: 768px) {
-  .seance-grid-panel {
-    padding: 10px;
-  }
-  
-  .seance-grid-panel__film-card {
-    min-width: 150px;
-    font-size: 12px;
-  }
-  
-  .seance-grid-panel__film-poster {
-    width: 30px;
-    height: 45px;
-  }
-  
-  .seance-grid-panel__hall-header {
-    width: 80px;
-    padding: 5px;
-  }
-  
-  .seance-grid-panel__hall-title {
-    font-size: 12px;
-  }
-  
-  .seance-grid-panel__hall-label-spacer {
-    width: 80px;
-  }
-  
-  .seance-grid-panel__time-label {
-    font-size: 8px;
-  }
-  
-  .seance-grid-panel__seance-title {
-    font-size: 8px;
-  }
-  
-  .seance-grid-panel__seance-time {
-    font-size: 8px;
-  }
-}
 
-@media (max-width: 480px) {
-  .seance-grid-panel__grid {
-    min-width: 360px; /* Уже на мобильных */
-  }
-  
-  .seance-grid-panel__time-mark {
-    min-width: 30px;
-  }
-  
-  .seance-grid-panel__time-label {
-    font-size: 7px;
-  }
-}
 
 /* Кнопка удаления фильма */
 .seance-grid-panel__film-delete-btn {
