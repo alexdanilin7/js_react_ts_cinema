@@ -257,10 +257,10 @@ const SeanceGridPanel: React.FC = () => {
   };
 
   // Временные отметки (каждые 2 часа от 00:00 до 24:00)
-  const TIME_MARKS = Array.from({ length: 13 }, (_, i) => {
-    const hour = i * 2;
-    return `${hour.toString().padStart(2, '0')}:00`;
-  });
+  // const TIME_MARKS = Array.from({ length: 13 }, (_, i) => {
+  //   const hour = i * 2;
+  //   return `${hour.toString().padStart(2, '0')}:00`;
+  // });
 
   // Ширина одного часа в пикселях
   const HOUR_WIDTH = 40;

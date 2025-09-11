@@ -37,15 +37,32 @@ const SeatSelection: React.FC = () => {
   useEffect(() => {
     const fetchSeanceDetails = async () => {
       try {
-        const response = await apiClient.get<{
-          films: any[];
-          halls: any[];
-          seances: any[];
-        }>('/alldata');
-        if (response.success) {
-          const { films, halls, seances } = response.result;
+        let films:any[] = [] ;
+        let halls:any[] = [] ;
+        let seances:any[]= [];
+        const keys = ["seances", "films", "halls"];
+          const isAllExist = keys.every(key => localStorage.getItem(key) !== null);
+            if(isAllExist){
+                 seances = JSON.parse(localStorage.getItem("seances") || "[]");
+                 films = JSON.parse(localStorage.getItem("films") || "[]");
+                 halls = JSON.parse(localStorage.getItem("halls") || "[]");
+            }else{
+                const response = await apiClient.get<{
+                    films: any[];
+                    halls: any[];
+                    seances: any[];
+                  }>('/alldata');
+                  if (response.success) {
+                      films  = response.result.films;
+                      halls = response.result.halls;
+                      seances = response.result.seances;
+                    }else {
+                      setBookingError('Ошибка загрузки данных о сеансе');
+                    }
+                  }
+        if (seances && films && halls) {  
+        }
           const seance = seances.find((s: any) => s.id === Number(seanceId));
-
           if (seance) {
             const film = films.find((f: any) => f.id === seance.seance_filmid);
             const hall = halls.find((h: any) => h.id === seance.seance_hallid);
@@ -57,11 +74,9 @@ const SeatSelection: React.FC = () => {
             setPriceVip(hall?.hall_price_vip || 350);
           } else {
             setBookingError('Сеанс не найден');
-          }
-        } else {
-          setBookingError('Ошибка загрузки данных о сеансе');
-        }
+          } 
       } catch (err) {
+        console.log(err);
         setBookingError('Ошибка сети при загрузке данных');
       }
     };
@@ -117,7 +132,6 @@ const SeatSelection: React.FC = () => {
 
     try {
       const response = await apiClient.post<any[]>('/ticket', formData);
-      console.log(response);
       if (response.success && response.result.length > 0) {
         const firstTicket = response.result[0];
         //setBookingCode(firstTicket.id.toString());
@@ -165,34 +179,37 @@ const SeatSelection: React.FC = () => {
             <h2>{movieTitle}</h2>
             <div className="seat-selection__info">
               <p><strong>Начало сеанса:</strong> {seanceTime}</p>
-              <p><strong>Зал:</strong> {hallName}</p>
+              <p><b>{hallName}</b></p>
             </div>
           </div>
           <div className="seat-selection__hall-map">
                <HallMap price={{"vip": priceVip, "standart":priceStandart}} hallConfig={hallConfig} onSeatSelect={handleSeatSelect} />
           </div>
-          <div className="seat-selection__summary">
+          {/* <div className="seat-selection__summary">
             <p><strong>Выбрано мест:</strong> {selectedSeats.length}</p>
             <p><strong>Стоимость:</strong> {totalCost} ₽</p>
-          </div>
+          </div> */}
 
           <button
             className="seat-selection__confirm"
             disabled={selectedSeats.length === 0}
             onClick={handleBookTickets}
           >
-            Забронировать выбранные места
+            Забронировать
           </button>
         </>
       ) : (
         <div className="seat-selection__confirmation">
-          <h2>ВЫ ВЫБРАЛИ БИЛЕТЫ:</h2>
-          <hr />
-          <p><strong>На фильм:</strong> {movieTitle}</p>
-          <p><strong>Места:</strong> {selectedSeats.map(s => `Ряд ${s.row + 1}, место ${s.seat + 1}`).join(', ')}</p>
-          <p><strong>В зале:</strong> {hallName}</p>
-          <p><strong>Начало сеанса:</strong> {seanceTime}</p>
-          <p><strong>Стоимость:</strong> {totalCost} ₽</p>
+          <div className="seat-selection__ticket-header">
+             <h2>ВЫ ВЫБРАЛИ БИЛЕТЫ:</h2>
+          </div>
+          <div className='seat-selection__info'>
+            <p><strong>На фильм:</strong> {movieTitle}</p>
+            <p><strong>Места:</strong> {selectedSeats.map(s => `Ряд ${s.row + 1}, место ${s.seat + 1}`).join(', ')}</p>
+            <p><strong>В зале:</strong> {hallName}</p>
+            <p><strong>Начало сеанса:</strong> {seanceTime}</p>
+            <p><strong>Стоимость:</strong> {totalCost} ₽</p>
+          </div>
           {showQrCode ? (
             <div className="seat-selection__qr-code">
               <QRCodeSVG value={qrCodeData || ''} size={150} level="H" />
@@ -205,11 +222,13 @@ const SeatSelection: React.FC = () => {
               Получить код бронирования
             </button>
           )}
+           <div className='seat-selection__footer'>
           <p>
             После оплаты билет будет доступен в этом окне и придёт на почту.
             Покажите QR-код контролёру у входа в зал.
           </p>
           <p>Приятного просмотра!</p>
+          </div>
         </div>
       )}
     </div>

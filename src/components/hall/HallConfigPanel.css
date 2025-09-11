@@ -1,8 +1,5 @@
 
 .hall-config-panel {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
 }
@@ -29,7 +26,9 @@
   display: flex;
   width: 50%;
   gap: 10px;
+  flex-direction: row;
   align-items: end;
+  vertical-align: middle;
 }
 
 .hall-config-panel__dimensions input {
@@ -43,23 +42,29 @@
 .hall-config-panel__field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   flex: 1;
-  min-width: 120px;
+  min-width: 10px;
+  max-width: 100px;
 }
 
 .hall-config-panel__field label {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  color: #333;
-  margin-bottom: 2px;
+  color: rgba(0, 0, 0, 0.25);
+  text-align: left;
 }
-
+.hall-config-panel__field span{
+  text-align: center;
+  align-items: center;
+}
 .hall-config-panel__field input {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
+  text-align: left;
+  color:rgba(0, 0, 0, 0.25);
 }
 
 .hall-config-panel__field input:focus {
@@ -127,21 +132,21 @@
 
 .hall-config-panel__actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 10px;
+  margin-top: 15px;
   margin-bottom: 15px;
 }
 
 .hall-config-panel__btn {
   padding: 10px 20px;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
 }
 
 .hall-config-panel__btn--cancel {
-  background-color: #95a5a6;
+  background-color: #c4c4c4;
   color: white;
 }
 
@@ -150,12 +155,12 @@
 }
 
 .hall-config-panel__btn--save {
-  background-color: #2ecc71;
+  background-color: #0A828A;
   color: white;
 }
 
 .hall-config-panel__btn--save:hover {
-  background-color: #27ae60;
+  background-color: #0A828A;
 }
 
 .hall-config-panel__btn:disabled {
@@ -181,6 +186,11 @@ text-align: left;
   justify-content: center;
   font-size: 14px;
   color: #555;
+  border: 1px solid #000;
+}
+.hall-config-panel__legend__hall h6 {
+  letter-spacing: 15px;
+  margin-top: 15px;
 }
 .hall-config-panel__legend-item {
   display: flex;
@@ -220,7 +230,6 @@ text-align: left;
   padding: 8px 16px;
   background-color: #f0f0f0;
   border: 1px solid #ccc;
-  border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -233,9 +242,9 @@ text-align: left;
 }
 
 .hall-config-panel__hall-btn--active {
-  background-color: #007bff;
-  color: white;
-  border-color: #0056b3;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  /* background-color: #007bff; */
+  color: rgb(0, 0, 0);
+  /* border-color: #0056b3;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); */
   transform: scale(1.2);
 }

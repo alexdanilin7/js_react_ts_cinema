@@ -1,8 +1,7 @@
 .seat-selection {
   max-width: 1200px;
-  max-height: 800px;
+  /* max-height: 650px; */
   margin: 10px auto;
-  padding: 15px;
   font-family: Arial, sans-serif;
   background-color: #F1EBE6;
 }
@@ -15,6 +14,10 @@
   margin: 0 0 10px;
   font-size: 24px;
   color: #333;
+  font-weight: 700;
+}
+.seat-selection__header b {
+  font-weight: 800;
 }
 
 .seat-selection__info {
@@ -46,22 +49,68 @@
 
 .seat-selection__confirm {
   display: block;
-  width: 50%;
-  padding: 12px;
+  width: 30%;
+  padding: 12px 0;
   background-color: #16A6AF;
   color: white;
   border: none;
   border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
-  margin: 20px auto;
+  margin: 10px auto;
+  margin-bottom: 20px;
+}
+.seat-selection__ticket-header{
+  padding: 0;
+  position: relative;
+}
+.seat-selection__ticket-header h2{
+  color: #C76F00;
+  padding: 10px;
+  position: relative;
+}
+.seat-selection__ticket-header::after{
+  content: '';
+  display: block;
+  position: absolute;
+  background-image: url('./assets/img/ticket-after.png');
+  left: 0;
+  right: 0;
+  height: 5px;
+  background-color: #C76F00;
+}
+.seat-selection__confirmation::before{
+  content: '';
+  display: block;
+  position: absolute;
+  background-image: url('./assets/img/ticket-before.png');
+  left: 0;
+  right: 0;
+  height: 3px;
+  top: -3px;
+  background-color: #C76F00; 
 }
 
+.seat-selection__confirmation::after{
+  content: '';
+  display: block;
+  position: absolute;
+  background-image: url('./assets/img/ticket-after.png');
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #C76F00;
+}
 .seat-selection__confirm:disabled {
   background-color: #bdc3c7;
   cursor: not-allowed;
 }
-
+.seat-selection__info{
+  padding: 10px;
+}
+.seat-selection__footer{
+  padding: 10px;
+}
 .seat-selection__back {
   display: block;
   width: 100%;
@@ -77,6 +126,9 @@
 .seat-selection__back:hover {
   background-color: #7f8c8d;
 }
+
+
+
 
 .seat-selection__qr-code {
   width: 200px;
@@ -96,6 +148,9 @@
 .seat-selection__confirmation{
   text-align: left;
   margin: 1px;
+  position: relative;
+  padding: 0px;
+
 }
 .seat-selection__confirmation p{
   font-size: 16px;

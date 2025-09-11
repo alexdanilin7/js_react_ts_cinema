@@ -21,8 +21,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, keyIndex }) => {
            <div className="movie-info">
             <h3 className="movie-title">{movie.title}</h3>
             <p>{movie.description}</p>
-            <p>{movie.duration} мин</p>
-            <p>{movie.genre}, {movie.releaseYear}</p>
+            <p>{movie.duration} мин {movie.genre}</p>
+            {/* <p>{movie.genre}, {movie.releaseYear}</p> */}
           </div>
       </div>
    

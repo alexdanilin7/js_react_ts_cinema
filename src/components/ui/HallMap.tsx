@@ -28,8 +28,8 @@ const HallMap: React.FC<HallMapProps> = ({ price, hallConfig, onSeatSelect }) =>
 
   return (
     <div className="hall-map">
-      <h3 className="hall-map__title">Экран</h3>
       <div className="hall-map__grid">
+        <img src='./assets/img/screen.png' className='hall-map__title' alt="Зал"/>
         {hallConfig.map((row, rowIndex) => (
           <div key={rowIndex} className="hall-map__row">
             {row.map((seatType, seatIndex) => (
@@ -44,8 +44,6 @@ const HallMap: React.FC<HallMapProps> = ({ price, hallConfig, onSeatSelect }) =>
                     : ''
                 }`}
               >
-                {/* Опционально: показать номер ряда и места */}
-                {/* {`${rowIndex + 1}, ${seatIndex + 1}`} */}
               </button>
             ))}
           </div>
@@ -57,12 +55,12 @@ const HallMap: React.FC<HallMapProps> = ({ price, hallConfig, onSeatSelect }) =>
           <span>Свободно ({price.standart} руб)</span>
         </div>
         <div className="hall-map__legend-item">
-          <span className="hall-map__legend-seat hall-map__legend-seat--vip"></span>
-          <span>Свободно VIP ({price.vip} руб)</span>
-        </div>
-        <div className="hall-map__legend-item">
           <span className="hall-map__legend-seat hall-map__legend-seat--taken"></span>
           <span>Занято</span>
+        </div>
+        <div className="hall-map__legend-item">
+          <span className="hall-map__legend-seat hall-map__legend-seat--vip"></span>
+          <span>Свободно VIP ({price.vip} руб)</span>
         </div>
         <div className="hall-map__legend-item">
           <span className="hall-map__legend-seat hall-map__legend-seat--selected"></span>

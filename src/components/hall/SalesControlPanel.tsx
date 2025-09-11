@@ -84,7 +84,7 @@ const SalesControlPanel: React.FC = () => {
       ) : (
         <>
           <div className="sales-control-panel__controls">
-            <h6>Выберите зал для управления продажами:</h6>
+            <h6>Выбирите залл для открытия/закрытия продаж:</h6>
             <div className="sales-control-panel__hall-buttons">
               {halls.length === 0 ? (
                 <span>Нет доступных залов</span>
@@ -107,15 +107,15 @@ const SalesControlPanel: React.FC = () => {
           {selectedHall && (
             <div className="sales-control-panel__status">
               <p>
-                <strong>Текущий статус:</strong>{' '}
+                {/* <strong>Текущий статус:</strong>{' '} */}
                 <span
-                  className={`sales-control-panel__status-text ${
-                    selectedHall.hall_open
-                      ? 'sales-control-panel__status-text--open'
-                      : 'sales-control-panel__status-text--closed'
-                  }`}
+                  // className={`sales-control-panel__status-text ${
+                  //   selectedHall.hall_open
+                  //     ? 'sales-control-panel__status-text--open'
+                  //     : 'sales-control-panel__status-text--closed'
+                  // }`}
                 >
-                  {selectedHall.hall_open ? 'Продажи открыты' : 'Продажи закрыты'}
+                  {selectedHall.hall_open ? 'Продажи открыты' : 'Всё готово к открытию'}
                 </span>
               </p>
 
@@ -127,18 +127,18 @@ const SalesControlPanel: React.FC = () => {
                 }`}
                 onClick={toggleSalesStatus}
               >
-                {selectedHall.hall_open ? 'Закрыть продажи' : 'Открыть продажи'}
+                {selectedHall.hall_open ? 'Закрыть продажу билетов' : 'Открыть продажу билетов'}
               </button>
             </div>
           )}
 
-          <div className="sales-control-panel__info">
+          {/* <div className="sales-control-panel__info">
             <p>Управление продажами:</p>
             <ul>
               <li><strong>Открытые залы:</strong> {halls.filter(h => h.hall_open === 1).length}</li>
               <li><strong>Закрытые залы:</strong> {halls.filter(h => h.hall_open === 0).length}</li>
             </ul>
-          </div>
+          </div> */}
         </>
       )}
     </div>

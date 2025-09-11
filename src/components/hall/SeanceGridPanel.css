@@ -19,7 +19,7 @@
 
 .seance-grid-panel__add-film-btn {
   padding: 10px 20px;
-  background-color: #2ecc71;
+  background-color: #0A828A;
   color: white;
   border: none;
   border-radius: 4px;
@@ -226,7 +226,7 @@
 
 /* Блок сеанса */
 .seance-grid-panel__seance-block {
-  background: #4caf50;
+  background: #0A828A;
   color: white;
   border-radius: 3px;
   padding: 4px 6px;

@@ -93,7 +93,10 @@ const HallConfigPanel: React.FC = () => {
       return newConfig;
     });
   };
-
+  
+  useEffect(() => {
+    applyDimensions();
+  }, [rows, places]);
   // Отмена изменений
   const handleCancel = () => {
     const hall = halls.find(h => h.id === selectedHallId);
@@ -161,19 +164,19 @@ const HallConfigPanel: React.FC = () => {
         <h6>Укажите количество рядов и максимальное количество кресел в ряду:</h6>
         <div className="hall-config-panel__dimensions">
           <div className="hall-config-panel__field">
-            <label htmlFor="hall-rows">Рядов</label>
+            <label htmlFor="hall-rows">Рядов, шт</label>
             <input
               id="hall-rows"
               type="number"
               value={rows || ''}
-              onChange={e => setRows(Number(e.target.value) || 0)}
+              onChange={e => setRows(Number(e.target.value) || 10)}
               min="1"
               max="20"
             />
           </div>
-
+          <span >X</span>
           <div className="hall-config-panel__field">
-            <label htmlFor="hall-places">Мест в ряду</label>
+            <label htmlFor="hall-places">Мест в ряду, шт</label>
             <input
               id="hall-places"
               type="number"
@@ -183,9 +186,9 @@ const HallConfigPanel: React.FC = () => {
               max="30"
             />
           </div>
-          <button onClick={applyDimensions} className="hall-config-panel__apply-btn">
+          {/* <button onClick={applyDimensions} className="hall-config-panel__apply-btn">
             Применить
-          </button>
+          </button> */}
         </div>
       </div>
       {/* Легенда */}

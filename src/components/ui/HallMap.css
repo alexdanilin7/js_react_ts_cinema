@@ -1,12 +1,16 @@
 .hall-map {
+  display:  flex;
   background-color: #000;
   color: white;
   padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .hall-map__title {
-  text-align: center;
-  margin-bottom: 20px;
+  width: 40%;
+  margin-bottom: 10px;
 }
 
 .hall-map__grid {
@@ -35,31 +39,39 @@
 }
 
 .hall-map__seat--vip {
-  background-color: orange;
+  background-color: #F9953A;
 }
 
 .hall-map__seat--taken {
-  background-color: gray;
+  background-color: #171D24;
+}
+.hall-map__seat--disabled {
+  background-color: #171D24;
 }
 
 .hall-map__seat--selected {
-  background-color: lightblue;
+  background-color: #25C4CE;
 }
 
 .hall-map__legend {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: auto auto; 
+  gap: 15px; 
+  justify-content: center;
   align-items: center;
-  gap: 20px;
-  justify-content: space-between;
+  padding: 10px;
+  color: white;
+  font-size: 14px;
+  margin: 0 auto;
+  max-width: 500px;
 }
 
 .hall-map__legend-item {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
+
 }
 
 .hall-map__legend-seat {
@@ -74,13 +86,13 @@
 }
 
 .hall-map__legend-seat--vip {
-  background-color: orange;
+  background-color: #F9953A;
 }
 
 .hall-map__legend-seat--taken {
-  background-color: gray;
+  background-color: #171D24;
 }
 
 .hall-map__legend-seat--selected {
-  background-color: lightblue;
+  background-color: #25C4CE;
 }

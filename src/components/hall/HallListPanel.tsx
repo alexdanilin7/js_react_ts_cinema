@@ -98,14 +98,14 @@ const HallsListPanel: React.FC = () => {
           <ul className="halls-list">
             {halls.length > 0 ? (
               halls.map(hall => (
-                <li key={hall.id} className="halls-list__item">
-                  <span>{hall.hall_name}</span>
-                  <button
-                    className="halls-list__delete-btn"
-                    onClick={() => handleDeleteHall(hall.id)}
-                  >
-                    🗑️
-                  </button>
+                  <li key={hall.id} className="halls-list__item">
+                    <span>-- {hall.hall_name.toUpperCase()}</span>
+                    <button
+                      className="halls-list__delete-btn"
+                      onClick={() => handleDeleteHall(hall.id)}
+                    >
+                      🗑️
+                    </button>
                 </li>
               ))
             ) : (

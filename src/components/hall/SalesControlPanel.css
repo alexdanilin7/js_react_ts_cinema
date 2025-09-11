@@ -1,13 +1,12 @@
 .sales-control-panel {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
 }
 
 .sales-control-panel__controls {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  text-align: left;
+  padding: 20px;
 }
 
 .sales-control-panel__select {
@@ -46,14 +45,13 @@
 .sales-control-panel__btn {
   padding: 12px 24px;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
 }
 
 .sales-control-panel__btn--open {
-  background-color: #2ecc71;
+  background-color: #0a828A;
   color: white;
 }
 
@@ -98,24 +96,24 @@
 }
 
 .sales-control-panel__hall-btn {
-  padding: 8px 16px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #000;
+    padding: 8px 16px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #000;
 }
 
 .sales-control-panel__hall-btn:hover {
   background-color: #e0e0e0;
   border-color: #999;
+  transition: all 0.2s ease;
 }
 
 .sales-control-panel__hall-btn--active {
-  background-color: #007bff;
   color: black;
   border-color: #0056b3;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  transform: scale(1.2);
 }

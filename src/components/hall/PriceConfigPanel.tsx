@@ -101,7 +101,6 @@ const PriceConfigPanel: React.FC = () => {
 
   return (
     <div className="price-config-panel panel">
-      <h2>Конфигурация цен</h2>
       {error && <div className="panel__error">{error}</div>}
 
       {loading ? (
@@ -109,7 +108,7 @@ const PriceConfigPanel: React.FC = () => {
       ) : (
         <>
           <div className="price-config-panel__controls">
-            <h6>Выберите зал для настройки цен:</h6>
+            <h6>Выберите зал для конфигурации:</h6>
             <div className="price-config-panel__hall-buttons">
               {halls.length === 0 ? (
                 <span>Нет доступных залов</span>
@@ -130,27 +129,40 @@ const PriceConfigPanel: React.FC = () => {
           </div>
 
           {selectedHallId && (
+           <div>
+             <span>Установите цены для типов кресел:</span>
+           
             <div className="price-config-panel__inputs">
+              
               <div className="price-config-panel__input-group">
-                <label>Обычное место</label>
+                <div className='price-config-panel__input-group__label'>
+                    <label htmlFor ="priceStandart">Цена, рублей</label>
                 <input
+                  id='priceStandart'
                   type="number"
                   placeholder="Цена"
                   value={priceStandard || ''}
                   onChange={e => setPriceStandard(Number(e.target.value) || 0)}
                   min="1"
                 />
+                </div>
+                <span> за обычное место</span>
               </div>
               <div className="price-config-panel__input-group">
-                <label>VIP место</label>
-                <input
-                  type="number"
-                  placeholder="Цена"
-                  value={priceVip || ''}
-                  onChange={e => setPriceVip(Number(e.target.value) || 0)}
-                  min="1"
-                />
+                  <div className='price-config-panel__input-group__label'>
+                    <label htmlFor ="priceVip">Цена, рублей</label>
+                    <input
+                      id='priceVip'
+                      type="number"
+                      placeholder="Цена"
+                      value={priceVip || ''}
+                      onChange={e => setPriceVip(Number(e.target.value) || 0)}
+                      min="1"
+                    />
+                </div>
+                <span>за VIP место</span>
               </div>
+            </div>
             </div>
           )}
 
@@ -170,7 +182,7 @@ const PriceConfigPanel: React.FC = () => {
             </button>
           </div>
 
-          <div className="price-config-panel__info">
+          {/* <div className="price-config-panel__info">
             <p>Текущие цены:</p>
             {halls
               .filter(h => h.id === selectedHallId)
@@ -180,7 +192,7 @@ const PriceConfigPanel: React.FC = () => {
                   <li>VIP: <strong>{h.hall_price_vip} ₽</strong></li>
                 </ul>
               ))}
-          </div>
+          </div> */}
         </>
       )}
     </div>
