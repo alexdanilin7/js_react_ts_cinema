@@ -17,14 +17,14 @@ const HallSessionList: React.FC<HallSessionListProps> = ({ sessionsByHall, onSel
   return (  
     <div className='hall-session'>
       {sessionsByHall.map((session)=>(
-                            <>
-                              <div className='hall-session__title'>{capitalizeFirstLetter(session.hallName)}</div>
-                              <ul className='session-time'>
-                                {session.seanceTimes.map((time)=>(
-                                  <li key={time.seanceId} onClick={()=>onSelectSession(time.seanceId, "2023-12-01")}>{time.seance_time}</li>
-                                  ))}
-                              </ul>
-                            </>
+      <>
+        <div className='hall-session__title'>{capitalizeFirstLetter(session.hallName)}</div>
+        <ul className='session-time'>
+          {session.seanceTimes.map((time)=>(
+            <li key={time.seanceId} onClick={()=>onSelectSession(time.seanceId, "2023-12-01")}>{time.seance_time}</li>
+            ))}
+        </ul>
+      </>
                           ))}
                                                        
     </div>

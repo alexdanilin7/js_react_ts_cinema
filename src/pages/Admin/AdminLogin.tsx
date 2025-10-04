@@ -35,30 +35,31 @@ const AdminLogin: React.FC = () => {
 
   return (
     <div className="admin-login">
-      <div className="admin-login__form">
-      <h2>АВТОРИЗАЦИЯ</h2>
-      <form onSubmit={handleLogin}>
-        <label>
-          Email
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="example@domain.ru"
-          />
-        </label>
-        <label>
-          Пароль
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button type="submit">Авторизоваться</button>
-        {error && <p className="error">{error}</p>}
-      </form>
+      <div className='admin-login__header'>
+        <span className='admin-login__header-text'>АВТОРИЗАЦИЯ</span>
       </div>
+        <form onSubmit={handleLogin}>
+          
+          <label>
+            <span className='form-label__text'>Email</span>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="example@domain.ru"
+            />
+          </label>
+          <label>
+             <span className='form-label__text'>Пароль</span>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <button type="submit">Авторизоваться</button>
+          {error && <p className="error">{error}</p>}
+        </form>
     </div>
 
   );

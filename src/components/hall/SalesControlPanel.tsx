@@ -29,6 +29,9 @@ const SalesControlPanel: React.FC = () => {
         const response = await apiClient.get<ApiAllData>('/alldata');
         if (response.success) {
           setHalls(response.result.halls);
+          if (response.result.halls.length > 0) {
+            setSelectedHallId(response.result.halls[0].id);
+          }
         } else {
           setError(response.error || 'Не удалось загрузить залы');
         }

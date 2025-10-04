@@ -32,11 +32,14 @@ const DateSelector: React.FC<DateSelectorProps> = ({ onChange }) => {
 
       const label = isToday ? (
         <span className="date-label">
-          <span className="date-label__today">Сегодня</span><br/>
+          <span className="date-label__today">Сегодня</span>
           <span className="date-label__weekday">{`${weekday} ${day}`}</span>
         </span>
       ) : (
-        <span className="date-label__weekday">{`${weekday}`} <br/> {`${day}`}</span>
+        <span className="date-label">
+        <span className="date-label__weekday">{`${weekday}`}</span>
+        <span className="date-label__weekday"> {`${day}`}</span>
+        </span>
       );
 
       dates.push({
@@ -72,7 +75,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({ onChange }) => {
               selectedDate === dateItem.date ? 'date-selector__button--active' : ''
             }`}
           >
-            <span>{dateItem.label}</span>
+            { <span>{dateItem.label}</span> }
           </button>
         ))}
         <button className="date-selector__next-week" onClick={goToNextWeek}>  

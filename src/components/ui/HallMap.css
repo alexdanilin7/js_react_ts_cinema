@@ -2,15 +2,18 @@
   display:  flex;
   background-color: #000;
   color: white;
-  padding: 20px;
+  padding: 12px;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  width: 100%;
+  max-height: 370px;
+  margin-bottom: 20px;
 }
 
 .hall-map__title {
-  width: 40%;
-  margin-bottom: 10px;
+  width: 30%;
+  margin-bottom: 7px;
 }
 
 .hall-map__grid {
@@ -26,8 +29,8 @@
 }
 
 .hall-map__seat {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
@@ -60,11 +63,12 @@
   gap: 15px; 
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 25px;
   color: white;
   font-size: 14px;
-  margin: 0 auto;
+  margin: 0px auto;
   max-width: 500px;
+  margin-left: 34%;
 }
 
 .hall-map__legend-item {
@@ -75,10 +79,18 @@
 }
 
 .hall-map__legend-seat {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+.hall-map__legend-seat-price{
+  color: white;
+  font-size: 14px;
+  font-family: Roboto;
+  font-weight: 300;
+  line-height: 16px;
+  word-wrap: break-word;
 }
 
 .hall-map__legend-seat--standart {

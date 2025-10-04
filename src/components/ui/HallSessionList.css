@@ -5,8 +5,12 @@
 }
 
 .hall-session__title {
-  margin-bottom: 1px;
-  font-weight: 600;
+  color: black;
+  font-size: 15px;
+  font-family: Roboto;
+  font-weight: 500;
+  line-height: 17px;
+  word-wrap: break-word;
 }
 
 .session-list {
@@ -15,14 +19,14 @@
 }
 
 .session-list li {
-  margin-bottom: 5px;
+  margin-bottom: 7px;
   
 }
 
 .session-time {
   list-style: none;
   display: inline-flex;
-  padding: 5px 10px;
+  padding: 8px 2px;
   margin-right: 5px;
   border-radius: 4px;
   cursor: pointer;
@@ -31,8 +35,12 @@
 }
 
 .session-time li {
+  width: 53px;
+  height: 33px;
   padding: 5px;
   background-color: #ffffff;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12),
     0px 2px 2px 0px rgba(0, 0, 0, 0.24);
+
+
 }

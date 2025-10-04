@@ -29,6 +29,10 @@ const HallConfigPanel: React.FC = () => {
         const response = await apiClient.get<{ halls: Hall[] }>('/alldata');
         if (response.success) {
           setHalls(response.result.halls);
+          if (response.result.halls.length > 0) {
+            setSelectedHallId(response.result.halls[0].id);
+          }
+          
         }
       } catch (err) {
         console.error('Ошибка загрузки залов:', err);
@@ -176,7 +180,7 @@ const HallConfigPanel: React.FC = () => {
           </div>
           <span >X</span>
           <div className="hall-config-panel__field">
-            <label htmlFor="hall-places">Мест в ряду, шт</label>
+            <label htmlFor="hall-places">Мест, шт</label>
             <input
               id="hall-places"
               type="number"
@@ -193,26 +197,28 @@ const HallConfigPanel: React.FC = () => {
       </div>
       {/* Легенда */}
       <div className='hall-config-panel__legend__title'>
-        <h6>Теперь вы можете указать типы кресел на схеме зала:</h6>
+        <span>Теперь вы можете указать типы кресел на схеме зала:</span>
       </div>
       <div className="hall-config-panel__legend">
         
         <div className="hall-config-panel__legend-item">
           <span className="hall-config-panel__legend-color hall-config-panel__legend-color--standart"></span>
-          <span> - Обычные кресла</span>
+          <span className='hall-config-panel__legend-item-title'> - Обычные кресла</span>
         </div>
         <div className="hall-config-panel__legend-item">
           <span className="hall-config-panel__legend-color hall-config-panel__legend-color--vip"></span>
-          <span> - VIP кресла</span>
+          <span className='hall-config-panel__legend-item-title'> - VIP кресла</span>
         </div>
         <div className="hall-config-panel__legend-item">
           <span className="hall-config-panel__legend-color hall-config-panel__legend-color--disabled"></span>
-          <span> - заблокированные (Нет кресла)</span>
+          <span className='hall-config-panel__legend-item-title'> - заблокированные (Нет кресла)</span>
         </div>
       </div>
 
       {/* Схема зала */}
       {selectedHallId && config.length > 0 && (
+        <div className='hall-config-container'>
+        <span className='hall-config-panel__legend-text'>Чтобы изменить вид кресла, нажмите по нему левой кнопкой мыши</span>
         <div className="hall-config-panel__legend__hall">
           <h6>ЭКРАН</h6>
           <div className="hall-config-panel__grid">
@@ -230,6 +236,7 @@ const HallConfigPanel: React.FC = () => {
               </div>
             ))}
           </div>
+        </div>
         </div>
       )}
 

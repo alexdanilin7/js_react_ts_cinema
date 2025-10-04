@@ -32,6 +32,9 @@ const PriceConfigPanel: React.FC = () => {
         const response = await apiClient.get<ApiAllData>('/alldata');
         if (response.success) {
           setHalls(response.result.halls);
+          if (response.result.halls.length > 0) {
+            setSelectedHallId(response.result.halls[0].id);
+          }
         } else {
           setError(response.error || 'Не удалось загрузить залы');
         }
@@ -130,7 +133,7 @@ const PriceConfigPanel: React.FC = () => {
 
           {selectedHallId && (
            <div>
-             <span>Установите цены для типов кресел:</span>
+             <span className='price-config-panel__title'>Установите цены для типов кресел:</span>
            
             <div className="price-config-panel__inputs">
               
@@ -146,7 +149,9 @@ const PriceConfigPanel: React.FC = () => {
                   min="1"
                 />
                 </div>
-                <span> за обычное место</span>
+                <div className='price-config-panel__legend-color-info'>
+                  <span> за </span> <span className='price-config-panel__legend-color--standart'></span><span>обычное место</span>
+                </div>
               </div>
               <div className="price-config-panel__input-group">
                   <div className='price-config-panel__input-group__label'>
@@ -160,7 +165,9 @@ const PriceConfigPanel: React.FC = () => {
                       min="1"
                     />
                 </div>
-                <span>за VIP место</span>
+                <div className='price-config-panel__legend-color-info'>
+                  <span>за</span> <span className='price-config-panel__legend-color--vip'></span><span>VIP место</span>
+                </div>
               </div>
             </div>
             </div>

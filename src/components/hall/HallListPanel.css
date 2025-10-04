@@ -5,11 +5,12 @@
 }
 
 .halls-list-panel h3 {
-  margin-top: 0;
+  color: black;
   font-size: 16px;
-  color: #333;
-  margin-bottom: 10px;
-  font-weight: 600;
+  font-family: Roboto;
+  font-weight: 400;
+  line-height: 18px;
+  word-wrap: break-word;
 }
 
 .halls-list {
@@ -19,11 +20,14 @@
 }
 
 .halls-list__item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2px 0;
-  width: 25%;
+  color: black;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 18px;
+  word-wrap: break-word;
+  margin-bottom: 10px;
 }
 
 .halls-list__item span {
@@ -33,13 +37,20 @@
 
 
 .halls-list__delete-btn {
+  width: 20px;
+  height: 20px;
   background: #fff;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
   cursor: pointer;
   font-size: 14px;
   color: #666;
   transition: color 0.2s ease;
   margin-left: 10px;
+  padding: 2px;
+  align-items: center;
+  box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.15);
 }
 
 .halls-list__delete-btn:hover {
@@ -62,13 +73,26 @@
 }
 
 .halls-list__create-btn {
-  padding: 10px 20px;
-  background-color: #16A6AF;
-  color: white;
+  width: 159px;
+  height: 40px;
+  padding-top: 11.20px;
+  padding-bottom: 11.90px;
+  padding-left: 31.73px;
+  padding-right: 31.38px;
+  background: #16A6AF;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  justify-content: flex-start;
+  align-items: flex-start;
   border: none;
-  cursor: pointer;
+
+  color: white;
   font-size: 14px;
+  font-family: Roboto;
   font-weight: 500;
+  text-transform: uppercase;
+  line-height: 16px;
+  word-wrap: break-word;
 }
 
 .halls-list__create-btn:hover {

@@ -99,12 +99,12 @@ const HallsListPanel: React.FC = () => {
             {halls.length > 0 ? (
               halls.map(hall => (
                   <li key={hall.id} className="halls-list__item">
-                    <span>-- {hall.hall_name.toUpperCase()}</span>
+                    <span>– {hall.hall_name.toUpperCase()}</span>
                     <button
                       className="halls-list__delete-btn"
                       onClick={() => handleDeleteHall(hall.id)}
                     >
-                      🗑️
+                      <img src="./assets/img/__before.png" alt="Удалить"></img>
                     </button>
                 </li>
               ))

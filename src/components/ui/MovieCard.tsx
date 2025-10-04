@@ -18,8 +18,9 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, keyIndex }) => {
     <div className="movie-card" key={keyIndex}>
       <div className="movie-content">
            <img src={movie.posterUrl || '/default-poster.jpg'} alt={movie.title} className="movie-poster" />
+           <div className='after'></div>
            <div className="movie-info">
-            <h3 className="movie-title">{movie.title}</h3>
+            <span className="movie-title">{movie.title}</span>
             <p>{movie.description}</p>
             <p>{movie.duration} мин {movie.genre}</p>
             {/* <p>{movie.genre}, {movie.releaseYear}</p> */}

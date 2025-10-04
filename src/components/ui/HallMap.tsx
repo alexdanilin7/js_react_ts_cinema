@@ -52,19 +52,19 @@ const HallMap: React.FC<HallMapProps> = ({ price, hallConfig, onSeatSelect }) =>
       <div className="hall-map__legend">
         <div className="hall-map__legend-item">
           <span className="hall-map__legend-seat hall-map__legend-seat--standart"></span>
-          <span>Свободно ({price.standart} руб)</span>
+          <span className='hall-map__legend-seat-price'>Свободно ({price.standart} руб)</span>
         </div>
         <div className="hall-map__legend-item">
           <span className="hall-map__legend-seat hall-map__legend-seat--taken"></span>
-          <span>Занято</span>
+          <span className='hall-map__legend-seat-price'>Занято</span>
         </div>
         <div className="hall-map__legend-item">
           <span className="hall-map__legend-seat hall-map__legend-seat--vip"></span>
-          <span>Свободно VIP ({price.vip} руб)</span>
+          <span className='hall-map__legend-seat-price'>Свободно VIP ({price.vip} руб)</span>
         </div>
         <div className="hall-map__legend-item">
           <span className="hall-map__legend-seat hall-map__legend-seat--selected"></span>
-          <span>Выбрано</span>
+          <span className='hall-map__legend-seat-price'>Выбрано</span>
         </div>
       </div>
     </div>

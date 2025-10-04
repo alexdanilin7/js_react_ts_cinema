@@ -2,10 +2,10 @@
 .movie-card {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 16px;
+  gap: 0px;
+  padding: 14px;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
   background-color: rgba(241, 235, 230, 0.95);
@@ -17,29 +17,45 @@
 
 .movie-content {
   display: flex;
-  gap: 16px;
+  gap: 1px;
 }
 
 .movie-poster {
-  width: 150px;
-  height: 200px;
+  width: 125px;
+  height: 175px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 2px;
+}
+.after{
+  border-style: solid;
+  border-color: #393939;
+  border-width: 14.4px 0px 0px 6.4px;
+  flex-shrink: 0;
+  width: 6px;
+  height: 14px;
 }
 .movie-info {
   display: flex;
   flex-direction: column;
   align-self: start;
   align-items: flex-start;
+  gap: 10px;
 }
-.movie-info h3 {
-  margin: 0;
+.movie-title {
+  color: #000;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 700;
+  line-height: 18px;
+  word-wrap: break-word;
 }
 
 .movie-info p {
-  margin: 5px 0;
-  color: #666;
-  text-align: left;
+  font-size: 14px;
+  font-family: Roboto;
+  font-weight: 400;
+  line-height: 16px;
+  word-wrap: break-word;
 }
 
 .movie-info ul {
@@ -50,5 +66,5 @@
 .hall-sessions {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 3px;
 }

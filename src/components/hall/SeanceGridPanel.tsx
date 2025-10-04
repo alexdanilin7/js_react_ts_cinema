@@ -44,6 +44,14 @@ const SeanceGridPanel: React.FC = () => {
   const [selectedHallId, setSelectedHallId] = useState<number | null>(null);
   const [selectedTime, setSelectedTime] = useState<string>('00:00');
 
+  const [draggedSeanceId, setDraggedSeanceId] = useState<number | null>(null);
+  const [draggedSeance, setDraggedSeance] = useState<{
+    id: number | null;
+    hallId: number | null;
+  }>({
+    id: null,
+    hallId: null,
+  });
   // Модальное окно для фильмов
   const [isFilmModalOpen, setIsFilmModalOpen] = useState(false);
   const [newFilm, setNewFilm] = useState({
@@ -234,6 +242,22 @@ const SeanceGridPanel: React.FC = () => {
   };
 
   // Удаление сеанса
+  // При начале перетаскивания сеанса
+const handleDragStartSeance = (e: React.DragEvent, seanceId: number, hallId: number) => {
+  //setDraggedSeanceId(id);
+  setDraggedSeance({ id: seanceId, hallId });
+  e.dataTransfer.effectAllowed = 'move';
+};
+
+const handleDropToTrash = async (e: React.DragEvent) => {
+  e.preventDefault();
+  const { id } = draggedSeance;
+
+  if (id !== null) {
+    await handleRemoveSeance(id);
+    setDraggedSeance({ id: null, hallId: null }); 
+  }
+};
   const handleRemoveSeance = async (seanceId: number) => {
     if (!window.confirm('Вы уверены, что хотите удалить этот сеанс?')) {
       return;
@@ -256,14 +280,10 @@ const SeanceGridPanel: React.FC = () => {
     }
   };
 
-  // Временные отметки (каждые 2 часа от 00:00 до 24:00)
-  // const TIME_MARKS = Array.from({ length: 13 }, (_, i) => {
-  //   const hour = i * 2;
-  //   return `${hour.toString().padStart(2, '0')}:00`;
-  // });
+  
 
   // Ширина одного часа в пикселях
-  const HOUR_WIDTH = 40;
+  const HOUR_WIDTH = 30;
   // Общая ширина временной шкалы (24 часа)
   const TIMELINE_WIDTH = 24 * HOUR_WIDTH;
 
@@ -302,7 +322,7 @@ const SeanceGridPanel: React.FC = () => {
                 e.stopPropagation();
                 handleRemoveFilm(film.id, film.film_name);
               }}
-              title="Удалить фильм">×</button>
+              title="Удалить фильм"> <img src="./assets/img/__before.png" alt="Удалить"></img></button>
           </div>
         ))}
       </div>
@@ -318,51 +338,64 @@ const SeanceGridPanel: React.FC = () => {
                 <div className="seance-grid-panel__hall-header">
                   <h3 className="seance-grid-panel__hall-title">{hall.hall_name.toUpperCase()}</h3>
                 </div>
-                
-                <div 
-                  className="seance-grid-panel__hall-timeline"
-                  onDragOver={handleDragOver}
-                  onDrop={e => handleDrop(e, hall.id, '12:00')}
-                  style={{ width: `${TIMELINE_WIDTH}px` }}
-                >
-                  {/* Сеансы */}
-                  {hallSeances.map(seance => {
-                    const film = films.find(f => f.id === seance.seance_filmid);
-                    if (!film) return null;
-                    
-                    const startMinutes = timeToMinutes(seance.seance_time);
-                    const startPosition = (startMinutes / 60) * HOUR_WIDTH;
-                    const width = Math.max((film.film_duration / 60) * HOUR_WIDTH, HOUR_WIDTH);
-                    
-                    return (
-                      <div
-                        key={seance.id}
-                        className="seance-grid-panel__seance-container"
-                        style={{
-                          left: `${startPosition}px`,
-                          width: `${width}px`
-                        }}
-                      >
-                        <div className="seance-grid-panel__seance-block">
-                          <span className="seance-grid-panel__seance-title">{film.film_name}</span>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleRemoveSeance(seance.id);
-                            }}
-                            className="seance-grid-panel__remove-btn"
-                            title="Удалить сеанс"
-                          >
-                            ×
-                          </button>
+                <div className='seance-grid-panel__timeline_trash'>
+                  {draggedSeance.hallId === hall.id && (<div 
+                      className="seance-grid-panel__trash-zone"
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={handleDropToTrash}
+                    >
+                      <img 
+                        src="./assets/img/trash.png" 
+                        alt="Корзина" 
+                        className="seance-grid-panel__trash-icon" 
+                      />
+                    </div>)}
+                  <div 
+                    className="seance-grid-panel__hall-timeline"
+                    onDragOver={handleDragOver}
+                    onDrop={e => handleDrop(e, hall.id, '12:00')}
+                    style={{ width: `${TIMELINE_WIDTH}px` }}
+                  >
+                    {/* Сеансы */}
+                    {hallSeances.map(seance => {
+                      const film = films.find(f => f.id === seance.seance_filmid);
+                      if (!film) return null;
+                      
+                      const startMinutes = timeToMinutes(seance.seance_time);
+                      const startPosition = (startMinutes / 60) * HOUR_WIDTH;
+                      // const width = Math.max((film.film_duration / 60) * HOUR_WIDTH, HOUR_WIDTH);
+                      
+                      return (
+                        <div
+                          key={seance.id}
+                          className="seance-grid-panel__seance-container"
+                          style={{
+                            left: `${startPosition}px`
+                          }}
+                          draggable
+                          onDragStart={e => handleDragStartSeance(e,  seance.id, hall.id)}
+                        >
+                          <div className="seance-grid-panel__seance-block">
+                            <span className="seance-grid-panel__seance-title">{film.film_name.substring(0, 15)}</span>
+                            {/* <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleRemoveSeance(seance.id);
+                              }}
+                              className="seance-grid-panel__remove-btn"
+                              title="Удалить сеанс"
+                            >
+                              ×
+                            </button> */}
+                          </div>
+                          <div className="seance-grid-panel__seance-time">
+                            <div className="seance-grid-panel__seance-time-line"></div>
+                            {seance.seance_time}
+                          </div>
                         </div>
-                        <div className="seance-grid-panel__seance-time">
-                          <div className="seance-grid-panel__seance-time-line"></div>
-                          {seance.seance_time}
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             );

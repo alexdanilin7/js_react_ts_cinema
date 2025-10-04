@@ -151,6 +151,7 @@ const SeatSelection: React.FC = () => {
         setQrCodeData(qrData);
       } else {
         setBookingError(response.error || 'Не удалось забронировать билеты');
+        console.log(response.error);
       }
     } catch (error) {
       setBookingError('Ошибка сети: не удалось отправить запрос');
@@ -176,11 +177,9 @@ const SeatSelection: React.FC = () => {
       {!isBookingConfirmed ? (
         <>
           <div className="seat-selection__header">
-            <h2>{movieTitle}</h2>
-            <div className="seat-selection__info">
-              <p><strong>Начало сеанса:</strong> {seanceTime}</p>
-              <p><b>{hallName}</b></p>
-            </div>
+            <span className='seat-selection__title'>{movieTitle}</span>
+              <span className='seat-selection__start-seance'>Начало сеанса: {seanceTime}</span>
+              <span className='seat-selection__hall'>{hallName}</span>
           </div>
           <div className="seat-selection__hall-map">
                <HallMap price={{"vip": priceVip, "standart":priceStandart}} hallConfig={hallConfig} onSeatSelect={handleSeatSelect} />
@@ -201,14 +200,14 @@ const SeatSelection: React.FC = () => {
       ) : (
         <div className="seat-selection__confirmation">
           <div className="seat-selection__ticket-header">
-             <h2>ВЫ ВЫБРАЛИ БИЛЕТЫ:</h2>
+             <span>ВЫ ВЫБРАЛИ БИЛЕТЫ:</span>
           </div>
           <div className='seat-selection__info'>
-            <p><strong>На фильм:</strong> {movieTitle}</p>
-            <p><strong>Места:</strong> {selectedSeats.map(s => `Ряд ${s.row + 1}, место ${s.seat + 1}`).join(', ')}</p>
-            <p><strong>В зале:</strong> {hallName}</p>
-            <p><strong>Начало сеанса:</strong> {seanceTime}</p>
-            <p><strong>Стоимость:</strong> {totalCost} ₽</p>
+            <p>На фильм: <b>{movieTitle}</b></p>
+            <p>Места: <b>{selectedSeats.map(s => `Ряд ${s.row + 1}, место ${s.seat + 1}`).join(', ')}</b></p>
+            <p>В зале: <b>{hallName}</b></p>
+            <p>Начало сеанса: <b>{seanceTime}</b></p>
+            <p>Стоимость: <b>{totalCost} ₽</b></p>
           </div>
           {showQrCode ? (
             <div className="seat-selection__qr-code">
@@ -216,7 +215,7 @@ const SeatSelection: React.FC = () => {
             </div>
           ) : (
             <button
-              className="seat-selection__confirm"
+              className="seat-selection__confirm_qr"
               onClick={() => setShowQrCode(true)}
             >
               Получить код бронирования
