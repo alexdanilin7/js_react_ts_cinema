@@ -104,7 +104,7 @@ const HallsListPanel: React.FC = () => {
                       className="halls-list__delete-btn"
                       onClick={() => handleDeleteHall(hall.id)}
                     >
-                      <img src="./assets/img/__before.png" alt="Удалить"></img>
+                      <img src="./assets/img/trashbefore.png" alt="Удалить"></img>
                     </button>
                 </li>
               ))

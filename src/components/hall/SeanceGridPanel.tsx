@@ -44,7 +44,7 @@ const SeanceGridPanel: React.FC = () => {
   const [selectedHallId, setSelectedHallId] = useState<number | null>(null);
   const [selectedTime, setSelectedTime] = useState<string>('00:00');
 
-  const [draggedSeanceId, setDraggedSeanceId] = useState<number | null>(null);
+  // const [draggedSeanceId, setDraggedSeanceId] = useState<number | null>(null);
   const [draggedSeance, setDraggedSeance] = useState<{
     id: number | null;
     hallId: number | null;
@@ -322,7 +322,7 @@ const handleDropToTrash = async (e: React.DragEvent) => {
                 e.stopPropagation();
                 handleRemoveFilm(film.id, film.film_name);
               }}
-              title="Удалить фильм"> <img src="./assets/img/__before.png" alt="Удалить"></img></button>
+              title="Удалить фильм"> <img src="./assets/img/trashbefore.png" alt="Удалить"></img></button>
           </div>
         ))}
       </div>
