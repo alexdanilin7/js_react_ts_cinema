@@ -117,7 +117,7 @@
   content: '';
   display: block;
   position: absolute;
-  background-image: url('./assets/img/ticket-after.png');
+  background-image: url('../assets/img/ticket-after.png');
   left: 0;
   right: 0;
   bottom: -6px;
@@ -128,7 +128,7 @@
   content: '';
   display: block;
   position: absolute;
-  background-image: url('./assets/img/ticket-before.png');
+  background-image: url('../assets/img/ticket-before.png');
   left: 0;
   right: 0;
   height: 3px;
@@ -140,7 +140,7 @@
   content: '';
   display: block;
   position: absolute;
-  background-image: url('./assets/img/ticket-after.png');
+  background-image: url('../assets/img/ticket-after.png');
   left: 0;
   right: 0;
   height: 3px;
