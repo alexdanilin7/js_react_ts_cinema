@@ -50,23 +50,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         </div>
       )}
     </div>
-    // <div className="timeline-item">
-    //   <div className="timeline-connector">
-    //     {!isFirst && <div className="timeline-line timeline-line-top" />}
-    //     <div className={`timeline-dot ${isOpen ? "active" : ""}`} />
-    //     {!isLast && <div className="timeline-line timeline-line-bottom" />}
-    //   </div>
-      
-    //   <div className="accordion-section">
-    //     <div className="accordion-header" onClick={onToggle}>
-    //       <h3>{title}</h3>
-    //       <span className={`accordion-icon ${isOpen ? "open" : ""}`}>
-    //         {isOpen ? "▼" : "►"}
-    //       </span>
-    //     </div>
-    //     {isOpen && <div className="accordion-content">{children}</div>}
-    //   </div>
-    // </div>
+   
   );
 };
 
@@ -94,9 +78,19 @@ const HallManager: React.FC = () => {
     }));
   };
 
+  const collapseAllSections = () => {
+    setOpenSections({
+      hallsList: true, 
+      hallConfig: false,
+      priceConfig: false,
+      seanceGrid: false,
+      salesControl: false
+    });
+  };
   return (
     <div className="hall-manager"> 
       <div className="timeline-container">
+
         {sections.map((section, index) => (
           <AccordionSection
             key={section.key}
@@ -106,7 +100,7 @@ const HallManager: React.FC = () => {
             isFirst={index === 0}
             isLast={index === sections.length - 1}
           >
-            {section.component}
+          {section.key==='hallsList' ? <HallsListPanel onHallDeleted={collapseAllSections}/> : section.component}
           </AccordionSection>
         ))}
       </div>

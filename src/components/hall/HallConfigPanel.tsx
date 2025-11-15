@@ -19,6 +19,7 @@ const HallConfigPanel: React.FC = () => {
   const [rows, setRows] = useState<number>(0);
   const [places, setPlaces] = useState<number>(0);
   const [config, setConfig] = useState<SeatType[][]>([]);
+  const[isFistLoading, setIsFirstLoading] = useState<boolean>(true);
 
   const seatTypes: SeatType[] = ['standart', 'vip', 'disabled'];
 
@@ -29,9 +30,13 @@ const HallConfigPanel: React.FC = () => {
         const response = await apiClient.get<{ halls: Hall[] }>('/alldata');
         if (response.success) {
           setHalls(response.result.halls);
-          if (response.result.halls.length > 0) {
+          if (isFistLoading) {
+            setIsFirstLoading(false);
             setSelectedHallId(response.result.halls[0].id);
           }
+           //if (response.result.halls.length > 0) {
+           //  setSelectedHallId(response.result.halls[0].id);
+          // }
           
         }
       } catch (err) {
@@ -39,11 +44,13 @@ const HallConfigPanel: React.FC = () => {
       }
     };
     fetchHalls();
-  }, []);
+  }, [selectedHallId]);
 
   // При выборе зала — загружаем его текущие настройки
   useEffect(() => {
     if (!selectedHallId) return;
+
+
 
     const hall = halls.find(h => h.id === selectedHallId);
     if (hall) {
@@ -55,15 +62,16 @@ const HallConfigPanel: React.FC = () => {
 
       // Если есть hall_config — используем его, иначе создаём пустую схему
       const savedConfig = hall.hall_config as SeatType[][] | undefined;
+      
       if (savedConfig && savedConfig.length > 0) {
-        setConfig(savedConfig);
-      } else {
-        setConfig(
-          Array(currentRows)
-            .fill(null)
-            .map(() => Array(currentPlaces).fill('standart'))
-        );
-      }
+        setConfig(savedConfig);}
+      // } else {
+      //   setConfig(
+      //     Array(currentRows)
+      //       .fill(null)
+      //       .map(() => Array(currentPlaces).fill('standart'))
+      //   );
+      // }
     }
   }, [selectedHallId, halls]);
 

@@ -21,15 +21,13 @@ const HallSessionList: React.FC<HallSessionListProps> = ({ sessionsByHall, onSel
         <div className='hall-session__title'>{capitalizeFirstLetter(session.hallName)}</div>
         <ul className='session-time'>
           {session.seanceTimes.map((time)=>(
-            <li key={time.seanceId} onClick={()=>onSelectSession(time.seanceId, "2023-12-01")}>{time.seance_time}</li>
+            <li key={session.hallName + time.seanceId} onClick={()=>onSelectSession(time.seanceId, "2023-12-01")}>{time.seance_time}</li>
             ))}
         </ul>
       </>
                           ))}
                                                        
     </div>
-
-
   );
 };
 

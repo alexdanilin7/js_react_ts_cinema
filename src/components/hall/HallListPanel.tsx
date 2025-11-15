@@ -7,8 +7,11 @@ interface Hall {
   id: number;
   hall_name: string;
 }
+interface HallsListPanelProps {
+  onHallDeleted?: () => void;
+}
 
-const HallsListPanel: React.FC = () => {
+const HallsListPanel: React.FC<HallsListPanelProps> = ({ onHallDeleted }) => {
   const [halls, setHalls] = useState<Hall[]>([]);
   const [newHallName, setNewHallName] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
@@ -59,6 +62,7 @@ const HallsListPanel: React.FC = () => {
         setHalls(response.result.halls);
         setNewHallName('');
         setIsModalOpen(false);
+        onHallDeleted?.();
       } else {
         setError(response.error || 'Не удалось создать зал');
       }
@@ -79,6 +83,7 @@ const HallsListPanel: React.FC = () => {
 
       if (response.success) {
         setHalls(response.result.halls);
+        onHallDeleted?.();
       } else {
         setError(response.error || 'Не удалось удалить зал');
       }

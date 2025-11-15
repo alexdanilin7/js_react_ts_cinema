@@ -38,7 +38,7 @@ body {
 
 .main-content {
   position: relative;
-  /* min-height: 100vh; */
+  min-height: 100vh;
   z-index: 2;
   background: transparent;
   padding: 0;

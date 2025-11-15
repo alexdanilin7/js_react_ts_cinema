@@ -180,13 +180,13 @@
 .seance-grid-panel__hall-section {
   display: flex;
   min-height: 80px;
-  min-width: 480px;
+  /* min-width: 480px; */
   flex-direction: column;
   margin-bottom: 20px;
 }
 @media(max-width: 900px){
   .seance-grid-panel__hall-section {
-      min-width: 280px;
+      /* min-width: 280px; */
   }
 }
 .seance-grid-panel__trash-icon{

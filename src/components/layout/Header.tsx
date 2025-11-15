@@ -17,15 +17,17 @@ const Header: React.FC = () => {
          {isAdminPage && (<div className='header_logo_down'> Администраторррская</div>)}
       </div>
       
-      {isAuthenticated ? (
+      {isAuthenticated && isAdminPage ? (
         <button className="header__login-btn" onClick={logout}>
          <span className="header__login-btn__text">ВЫЙТИ</span> 
         </button>
-      ) : (
-        <button className="header__login-btn" onClick={() => navigate('/admin/login')}>
+      ) : isAuthenticated && !isAdminPage ?
+        (<button className="header__login-btn" onClick={() => navigate('/admin/login')}>
+          <span className="header__login-btn__text">Панель управления</span> 
+        </button>):(<button className="header__login-btn" onClick={() => navigate('/admin/login')}>
           <span className="header__login-btn__text">ВОЙТИ</span> 
-        </button>
-      )}
+        </button>)
+      }
     </header>
   );
 };

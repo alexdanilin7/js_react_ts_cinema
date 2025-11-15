@@ -39,6 +39,25 @@ const SeanceGridPanel: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
+  const [hourWidth, setHourWidth] = useState(30);
+
+    useEffect(() => {
+      const handleResize = () => {
+        const width = window.innerWidth;
+        if (width < 480) {
+          setHourWidth(15); // Очень маленькие экраны
+        } else if (width < 850) {
+          setHourWidth(25); // Планшеты / мобильные
+        } else {
+          setHourWidth(32); // Десктоп
+        }
+      };
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+
   // Модальное окно для сеансов
   const [isSeanceModalOpen, setIsSeanceModalOpen] = useState(false);
   const [selectedHallId, setSelectedHallId] = useState<number | null>(null);
@@ -283,7 +302,7 @@ const handleDropToTrash = async (e: React.DragEvent) => {
   
 
   // Ширина одного часа в пикселях
-  const HOUR_WIDTH = 30;
+  const HOUR_WIDTH = hourWidth;
   // Общая ширина временной шкалы (24 часа)
   const TIMELINE_WIDTH = 24 * HOUR_WIDTH;
 
@@ -334,7 +353,7 @@ const handleDropToTrash = async (e: React.DragEvent) => {
             const hallSeances = seances.filter(s => s.seance_hallid === hall.id);
             
             return (
-              <div key={hall.id} className="seance-grid-panel__hall-section">
+              <div key={hall.id} className="seance-grid-panel__hall-section" style={{ width: `${TIMELINE_WIDTH}px` }}>
                 <div className="seance-grid-panel__hall-header">
                   <h3 className="seance-grid-panel__hall-title">{hall.hall_name.toUpperCase()}</h3>
                 </div>
