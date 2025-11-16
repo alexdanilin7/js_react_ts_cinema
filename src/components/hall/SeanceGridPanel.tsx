@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiClient } from '../../services/apiClient';
 import './SeanceGridPanel.css';
+import Background from '../layout/Background';
 
 // Типы
 interface Hall {
@@ -40,7 +41,22 @@ const SeanceGridPanel: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const [hourWidth, setHourWidth] = useState(30);
+  const COLORS = [
+    '#FFE5B4', 
+    '#C7E9C0', 
+    '#FFD7D7', 
+    '#D4F1F4', 
+    '#ECD5E3', 
+    '#FDF7C3', 
+    '#B8E0D2', 
+    '#D6E4FF' ,
+    '#D6E4F3',
+    '#D444FF'    
+  ];
 
+  const getColorByFilmId = (filmId: number): string => {
+    return COLORS[filmId % COLORS.length];
+  };
     useEffect(() => {
       const handleResize = () => {
         const width = window.innerWidth;
@@ -328,6 +344,7 @@ const handleDropToTrash = async (e: React.DragEvent) => {
           <div
             key={film.id}
             className="seance-grid-panel__film-card"
+            style={{backgroundColor:getColorByFilmId(film.id)}}
             draggable
             onDragStart={e => handleDragStart(e, film)}
           >
@@ -390,11 +407,12 @@ const handleDropToTrash = async (e: React.DragEvent) => {
                           className="seance-grid-panel__seance-container"
                           style={{
                             left: `${startPosition}px`
+                            
                           }}
                           draggable
                           onDragStart={e => handleDragStartSeance(e,  seance.id, hall.id)}
                         >
-                          <div className="seance-grid-panel__seance-block">
+                          <div className="seance-grid-panel__seance-block" style={{backgroundColor:getColorByFilmId(film.id)}}>
                             <span className="seance-grid-panel__seance-title">{film.film_name.substring(0, 15)}</span>
                             {/* <button
                               onClick={(e) => {
