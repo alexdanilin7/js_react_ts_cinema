@@ -10,7 +10,7 @@ interface HallSessionListProps {
         seance_time: string;
     }[];
   }[];
-  onSelectSession: (sessionId: number, date:string) => void;
+  onSelectSession: (sessionId: number) => void;
 }
 
 const HallSessionList: React.FC<HallSessionListProps> = ({ sessionsByHall, onSelectSession }) => {
@@ -21,7 +21,7 @@ const HallSessionList: React.FC<HallSessionListProps> = ({ sessionsByHall, onSel
         <div className='hall-session__title'>{capitalizeFirstLetter(session.hallName)}</div>
         <ul className='session-time'>
           {session.seanceTimes.map((time)=>(
-            <li key={session.hallName + time.seanceId} onClick={()=>onSelectSession(time.seanceId, "2023-12-01")}>{time.seance_time}</li>
+            <li key={session.hallName + time.seanceId} onClick={()=>onSelectSession(time.seanceId)}>{time.seance_time}</li>
             ))}
         </ul>
       </>

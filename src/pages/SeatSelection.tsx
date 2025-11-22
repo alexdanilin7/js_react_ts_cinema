@@ -127,7 +127,7 @@ const SeatSelection: React.FC = () => {
     formData.append('seanceId', seanceId || '');
     formData.append('ticketDate', date);
     formData.append('tickets', JSON.stringify(
-      selectedSeats.map(s => ({ row: s.row, place: s.seat, coast: s.price }))
+      selectedSeats.map(s => ({ row: s.row+1, place: s.seat+1, coast: s.price }))
     ));
 
     try {

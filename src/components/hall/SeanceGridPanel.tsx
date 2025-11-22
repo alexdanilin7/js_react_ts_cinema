@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiClient } from '../../services/apiClient';
 import './SeanceGridPanel.css';
-import Background from '../layout/Background';
+// import Background from '../layout/Background';
 
 // Типы
 interface Hall {

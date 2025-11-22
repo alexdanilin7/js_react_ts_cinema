@@ -6,13 +6,15 @@ import { useNavigate } from 'react-router-dom';
 
 interface MovieCardProps {
   movie: Movie;
+  date: string;
   keyIndex: number;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ movie, keyIndex }) => {
+const MovieCard: React.FC<MovieCardProps> = ({ movie, date, keyIndex }) => {
    const navigate = useNavigate();
-   const handleSessionClick = (seanceId: number, selectedDate:string) => {
-    navigate(`/session/${seanceId}?date=${selectedDate}`);
+   const handleSessionClick = (seanceId: number) => {
+    navigate(`/session/${seanceId}?date=${date}`);
+    console.log(date)
   };
   return (
     <div className="movie-card" key={keyIndex}>

@@ -88,7 +88,7 @@ const Home: React.FC = () => {
     <div className="home-page">
       <DateSelector onChange={setSelectedDate} />
       <div className="movie-list">
-        {movies.map(film => <div key={film.id}><MovieCard movie={film} keyIndex={film.id}/></div>)}
+        {movies.map(film => <div key={film.id}><MovieCard movie={film} date={selectedDate} keyIndex={film.id} /></div>)}
       </div>
     </div>
   );
